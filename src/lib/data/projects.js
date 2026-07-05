@@ -6,7 +6,7 @@ export const projects = [
     details: 'This app helps students view class schedules, organise weekly routines, and stay on top of academic commitments in one place. The experience is focused on clarity, speed, and a mobile-friendly workflow so important information is always easy to access.',
     date: '2025',
     thumb: '/designs/pro.png',
-    projecttype: "app"
+    projecttype: "app",
     logoSrc: '',
     src: "https://luanarapp.netlify.app/app"
   },
@@ -17,7 +17,7 @@ export const projects = [
   details: 'Designed for everyday use, this app combines expense tracking with practical budgeting features so users can monitor what they spend and plan ahead with ease. It focuses on a clean interface, quick data entry, and helpful insights that make money management feel effortless.',
   date: '2025',
   thumb: '/designs/pro3.png',
-  projecttype: "app"
+  projecttype: "app",
   logoSrc: '',
   src: "https://budgetpage.netlify.app/"
   },
@@ -28,7 +28,7 @@ export const projects = [
     details: 'This website brings together a refined layout, thoughtful content structure, and responsive design to present the brand with confidence. It highlights the organization’s identity through engaging sections, clear navigation, and a professional digital experience.',
     date: '2024',
     thumb: '/designs/pro6.png',
-    projecttype: "web app"
+    projecttype: "web app",
     logoSrc: '',
     src: "https://luanaranovaonline.netlify.app/"
   },
