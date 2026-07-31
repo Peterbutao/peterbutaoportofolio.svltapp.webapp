@@ -6,12 +6,18 @@
 
 <script>
   const orgs = [
-    { src: '/logo (1).png', name: 'Organisation 1' },
-    { src: '/logo (2).png', name: 'Organisation 2' },
-    { src: '/logo (3).png', name: 'Organisation 3' },
-    { src: '/logo (4).png', name: 'Organisation 4' },
-    { src: '/logo (5).png', name: 'Organisation 5' },
-    { src: '/logo (6).png', name: 'Organisation 6' },
+    { src: '/logo (1).png', name: 'Makoka Research Station' },
+    { src: '/logo (2).png', name: 'Development Fund Of Norway' },
+    { src: '/logo (3).png', name: 'LUANAR' },
+    { src: '/logo (4).png', name: 'Agrilab MW' },
+    { src: '/logo (5).png', name: 'FES' },
+    { src: '/logo (6).png', name: 'Find Your Feet' },
+    { src: '/logo (7).png', name: 'Claradens' },
+    { src: '/logo (8).png', name: 'Korevia' },
+    { src: '/logo (9).png', name: 'Youth Arise Network' },
+    { src: '/logo (10).png', name: 'Rotaract' },
+    { src: '/logo (11).png', name: 'Courgagoues Kids Foundtation' },
+    { src: '/logo (12).png', name: 'NCRS' },
   ];
 
   function handleImageError(event) {
@@ -35,6 +41,7 @@
           on:error={handleImageError}
         />
         <span class="fallback">{org.name}</span>
+        <span class="org-tooltip">{org.name}</span>
       </li>
     {/each}
   </ul>
@@ -68,16 +75,41 @@
     background: var(--wt);
     border: 1px solid var(--border);
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     transition: border-color 0.2s, box-shadow 0.2s;
   }
 
   .logo-item:hover {
     border-color: var(--yl);
     box-shadow: 0 2px 12px rgba(255,204,0,0.18);
+  }
+
+  .logo-item .org-tooltip {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(17, 24, 39, 0.95);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 2;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .logo-item:hover .org-tooltip,
+  .logo-item:focus-within .org-tooltip {
+    opacity: 1;
+    transform: translate(-50%, -110%);
   }
 
   .logo-item img {

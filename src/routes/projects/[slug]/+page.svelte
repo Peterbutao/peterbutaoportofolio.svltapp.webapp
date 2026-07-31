@@ -1,15 +1,3 @@
-<script context="module">
-  import { error } from '@sveltejs/kit';
-  import { getProjectBySlug, projects } from '$lib/data/projects';
-
-  export function load({ params }) {
-    const project = getProjectBySlug(params.slug);
-    if (!project) throw error(404, 'Project not found');
-
-    return { project, projects };
-  }
-</script>
-
 <script>
   export let data;
   const { project } = data;
@@ -27,6 +15,12 @@
 
   <div class="project-details">
     <p>{project.details}</p>
+  </div>
+
+  <div class="project-actions">
+    <a href={`/projects/${project.slug}`} class="action-link">ABOUT PROJECT</a>
+    <a href={project.github} class="action-link" target="_blank" rel="noopener noreferrer">GITHUB</a>
+    <a href={project.src} class="action-link" target="_blank" rel="noopener noreferrer">PROJECT LINK</a>
   </div>
 </article>
 
@@ -80,6 +74,35 @@
     font-size: 0.95rem;
     line-height: 1.9;
     color: var(--gray);
+  }
+
+  .project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 42px;
+  }
+
+  .action-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    background: transparent;
+    color: var(--bk);
+    border: 1.5px solid var(--bk);
+    border-radius: 999px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    transition: background 0.2s, color 0.2s, transform 0.2s ease;
+  }
+
+  .action-link:hover {
+    background: var(--bk);
+    color: var(--wt);
+    transform: translateY(-1px);
   }
 
   @media (min-width: 800px) {

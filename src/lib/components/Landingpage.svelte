@@ -15,7 +15,7 @@
       visible = true;
       
       // Profile ring attention animation every 6 seconds
-      const ringTl = gsap.timeline({ repeat: -1, repeatDelay: 6 });
+      const ringTl = gsap.timeline({ repeat: -1, repeatDelay: 3 });
       ringTl.to(profileRing, {
         boxShadow: '0 0 0 16px rgba(255,204,0,1), 0 0 40px rgba(255,204,0,0.8)',
         duration: 0.5,

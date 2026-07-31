@@ -1,13 +1,18 @@
 <div class="section-label">Expertise</div>
-<h2 class="section-title">M&E Consulting</h2>
+<h2 class="section-title">Consulting</h2>
 <div class="section-divider"></div>
 
 <div class="consultant-wrap">
   <div class="consultant-card">
-    <div class="c-icon">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M9 19c-5 1.5-8-1.5-8-5s3-6.5 8-7c0-3 1-5 3-6 0 3 1.5 5.5 4 7.5 3.5-1.5 5-4 5-7.5 2 1 3 3 3 6 5 .5 8 4 8 7s-3 6.5-8 5z"/>
-      </svg>
+    <div class="logo-marquee" aria-hidden="true">
+      <div class="logo-track">
+        <div class="logo-pill"><img src="/logo.png" alt="logo" /></div>
+        <div class="logo-pill"><img src="/logo (1).png" alt="logo" /></div>
+        <div class="logo-pill"><img src="/logo (2).png" alt="logo" /></div>
+        <div class="logo-pill"><img src="/logo.png" alt="logo" /></div>
+        <div class="logo-pill"><img src="/logo (1).png" alt="logo" /></div>
+        <div class="logo-pill"><img src="/logo (2).png" alt="logo" /></div>
+      </div>
     </div>
     <h3>Monitoring & Evaluation</h3>
     <p class="consultant-desc">
@@ -15,27 +20,27 @@
     </p>
     <ul class="consultant-list">
       <li>
-        <span class="check">✓</span>
+        <span class="check">:::::</span>
         <span>M&E Framework Design</span>
       </li>
       <li>
-        <span class="check">✓</span>
+        <span class="check">:::::</span>
         <span>Data Collection & Analysis</span>
       </li>
       <li>
-        <span class="check">✓</span>
+        <span class="check">:::::</span>
         <span>Impact Assessment</span>
       </li>
       <li>
-        <span class="check">✓</span>
+        <span class="check">:::::</span>
         <span>Stakeholder Reporting</span>
       </li>
       <li>
-        <span class="check">✓</span>
+        <span class="check">:::::</span>
         <span>Performance Dashboards</span>
       </li>
       <li>
-        <span class="check">✓</span>
+        <span class="check">:::::</span>
         <span>Donor Compliance & Audit Support</span>
       </li>
     </ul>
@@ -64,15 +69,48 @@
     box-shadow: 0 4px 24px rgba(255,204,0,0.12);
   }
 
-  .c-icon {
-    width: 44px; height: 44px;
-    background: var(--yl);
-    border-radius: 10px;
+  .logo-marquee {
+    overflow: hidden;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 240px;
+  }
+
+  .logo-track {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+    animation: logoWalk 8s linear infinite;
+  }
+
+  .logo-pill {
+    width: 64px;
+    height: 64px;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.08);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 16px;
-    color: var(--bk);
+    overflow: hidden;
+    flex-shrink: 0;
+    /* background: linear-gradient(135deg, rgba(255,204,0,0.15), rgba(255,204,0,0.4)); */
+  }
+
+  .logo-pill img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    transform: translateX(-4px);
+  }
+
+  @keyframes logoWalk {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-50% - 5px));
+    }
   }
 
   .consultant-card h3 {

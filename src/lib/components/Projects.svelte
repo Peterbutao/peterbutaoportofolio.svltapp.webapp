@@ -15,7 +15,9 @@
         desc={p.desc}
         date={p.date}
         thumb={p.thumb}
-        href={`/projects/${p.slug}`}
+        aboutHref={`/projects/${p.slug}`}
+        githubHref={p.github}
+        projectHref={p.src}
         logoSrc={p.logoSrc}
       />
     </li>

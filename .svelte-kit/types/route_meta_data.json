@@ -1,5 +1,13 @@
 {
 	"/": [],
+	"/UI-ux-designs": [],
+	"/UI-ux-designs/[slug]": [],
+	"/UI/UX-designs": [],
+	"/UI/UX-designs/[slug]": [
+		"src/routes/UI/UX-designs/[slug]/+page.js"
+	],
 	"/projects": [],
-	"/projects/[slug]": []
+	"/projects/[slug]": [
+		"src/routes/projects/[slug]/+page.js"
+	]
 }

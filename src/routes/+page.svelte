@@ -1,6 +1,7 @@
 <script>
   import Landingpage from '$lib/components/Landingpage.svelte';
   import Organisations from '$lib/components/Organisations.svelte';
+  import UIDesigns from '$lib/components/UIDesigns.svelte';
   import Projects from '$lib/components/Projects.svelte';
   import Experience from '$lib/components/Experience.svelte';
   import Community from '$lib/components/Community.svelte';
@@ -18,6 +19,10 @@
     <Organisations />
   </section>
   
+  <section id="ui-designs" class="page-section">
+    <UIDesigns />
+  </section>
+
   <section id="projects" class="page-section">
     <Projects />
   </section>

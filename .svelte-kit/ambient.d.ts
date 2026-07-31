@@ -43,6 +43,7 @@ declare module '$env/static/private' {
 	export const APPDATA: string;
 	export const BUNDLED_DEBUGPY_PATH: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
+	export const CLAUDE_CODE_SSE_PORT: string;
 	export const COLOR: string;
 	export const COLORTERM: string;
 	export const CommonProgramFiles: string;
@@ -55,9 +56,6 @@ declare module '$env/static/private' {
 	export const DEFLOGDIR: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_12036_1592913036: string;
-	export const EFC_12036_2946480783: string;
-	export const EFC_12036_4126798990: string;
 	export const GIT_ASKPASS: string;
 	export const GIT_EDITOR: string;
 	export const GIT_MERGE_AUTOEDIT: string;
@@ -70,9 +68,6 @@ declare module '$env/static/private' {
 	export const LOCALAPPDATA: string;
 	export const LOGONSERVER: string;
 	export const NODE: string;
-	export const NODE_ENV: string;
-	export const NODE_EXE: string;
-	export const NPM_CLI_JS: string;
 	export const npm_command: string;
 	export const npm_config_cache: string;
 	export const npm_config_engine_strict: string;
@@ -93,8 +88,6 @@ declare module '$env/static/private' {
 	export const npm_package_json: string;
 	export const npm_package_name: string;
 	export const npm_package_version: string;
-	export const NPM_PREFIX_JS: string;
-	export const NPM_PREFIX_NPM_CLI_JS: string;
 	export const NUMBER_OF_PROCESSORS: string;
 	export const OneDrive: string;
 	export const OneDriveConsumer: string;
@@ -109,6 +102,7 @@ declare module '$env/static/private' {
 	export const ProgramFiles: string;
 	export const ProgramW6432: string;
 	export const PROMPT: string;
+	export const PSExecutionPolicyPreference: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
 	export const PYDEVD_DISABLE_FILE_VALIDATION: string;
@@ -228,6 +222,7 @@ declare module '$env/dynamic/private' {
 		APPDATA: string;
 		BUNDLED_DEBUGPY_PATH: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
+		CLAUDE_CODE_SSE_PORT: string;
 		COLOR: string;
 		COLORTERM: string;
 		CommonProgramFiles: string;
@@ -240,9 +235,6 @@ declare module '$env/dynamic/private' {
 		DEFLOGDIR: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_12036_1592913036: string;
-		EFC_12036_2946480783: string;
-		EFC_12036_4126798990: string;
 		GIT_ASKPASS: string;
 		GIT_EDITOR: string;
 		GIT_MERGE_AUTOEDIT: string;
@@ -255,9 +247,6 @@ declare module '$env/dynamic/private' {
 		LOCALAPPDATA: string;
 		LOGONSERVER: string;
 		NODE: string;
-		NODE_ENV: string;
-		NODE_EXE: string;
-		NPM_CLI_JS: string;
 		npm_command: string;
 		npm_config_cache: string;
 		npm_config_engine_strict: string;
@@ -278,8 +267,6 @@ declare module '$env/dynamic/private' {
 		npm_package_json: string;
 		npm_package_name: string;
 		npm_package_version: string;
-		NPM_PREFIX_JS: string;
-		NPM_PREFIX_NPM_CLI_JS: string;
 		NUMBER_OF_PROCESSORS: string;
 		OneDrive: string;
 		OneDriveConsumer: string;
@@ -294,6 +281,7 @@ declare module '$env/dynamic/private' {
 		ProgramFiles: string;
 		ProgramW6432: string;
 		PROMPT: string;
+		PSExecutionPolicyPreference: string;
 		PSModulePath: string;
 		PUBLIC: string;
 		PYDEVD_DISABLE_FILE_VALIDATION: string;

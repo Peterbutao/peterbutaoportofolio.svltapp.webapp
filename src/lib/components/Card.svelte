@@ -1,29 +1,35 @@
 <script>
   /**
    * Props:
-   *   title    — project title
-   *   desc     — short description
-   *   date     — display date string
-   *   thumb    — image src (optional)
-   *   href     — link to project
-   *   logoSrc  — small logo src (optional)
+   *   title        — project title
+   *   desc         — short description
+   *   date         — display date string
+   *   thumb        — image src (optional)
+   *   aboutHref    — link to the project slug page
+   *   githubHref   — external GitHub URL
+   *   projectHref  — external live project URL
+   *   logoSrc      — small logo src (optional)
    */
-  export let title   = 'Project Title';
-  export let desc    = 'Short description of this project and the technologies used.';
-  export let date    = '2024';
-  export let thumb   = '';
-  export let href    = '/';
-  export let logoSrc = '';
+  export let title       = 'Project Title';
+  export let desc        = 'Short description of this project and the technologies used.';
+  export let date        = '2024';
+  export let thumb       = '';
+  export let aboutHref   = '/';
+  export let githubHref  = '';
+  export let projectHref = '';
+  export let logoSrc     = '';
 </script>
 
-<a {href} class="card" target={href.startsWith('http') ? '_blank' : '_self'} rel="noopener">
-  <div class="card-thumb">
-    {#if thumb}
-      <img src={thumb} alt={title} />
-    {:else}
-      <span class="thumb-label">{title}</span>
-    {/if}
-  </div>
+<article class="card">
+  <a href={aboutHref} class="card-thumb-link" aria-label={`View ${title}`}>
+    <div class="card-thumb">
+      {#if thumb}
+        <img src={thumb} alt={title} />
+      {:else}
+        <span class="thumb-label">{title}</span>
+      {/if}
+    </div>
+  </a>
 
   <div class="card-body">
     <h3>{title}</h3>
@@ -33,17 +39,24 @@
   <div class="card-foot">
     <span class="date">{date}</span>
   </div>
-  <span class="view-btn">
-    VIEW PROJECT →
-  </span>
-</a>
+
+  <div class="card-actions">
+    <a href={aboutHref} class="action-link">DETAILS</a>
+    {#if githubHref}
+      <a href={githubHref} class="action-link" target="_blank" rel="noopener noreferrer">GITHUB</a>
+    {/if}
+    {#if projectHref}
+      <a href={projectHref} class="action-link" target="_blank" rel="noopener noreferrer">PROJECT LINK</a>
+    {/if}
+  </div>
+</article>
 
 <style>
   .card {
     display: flex;
     flex-direction: column;
     background: white;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.07);
     overflow: hidden;
     width: 100%;
@@ -55,6 +68,11 @@
   .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 36px rgba(0,0,0,0.12);
+  }
+
+  .card-thumb-link {
+    display: block;
+    color: inherit;
   }
 
   /* ─── DESKTOP: allow 2-col on wider screens ─── */
@@ -135,22 +153,63 @@
     object-fit: contain;
   }
 
-  .view-btn {
-    display: block;
-    padding: 12px;
-    background: var(--yl);
-    color: var(--bk);
-    text-align: center;
-    font-weight: 700;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    transition: background 0.2s, color 0.2s;
+  .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 14px 14px;
     border-top: 1px solid var(--border);
-    cursor: pointer;
   }
 
-  .card:hover .view-btn {
+  .action-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    background: transparent;
+    color: var(--bk);
+    border: 1.5px solid var(--bk);
+    border-radius: 999px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    transition: background 0.2s, color 0.2s, transform 0.2s ease;
+    text-decoration: none;
+    animation: cardLinkFlow 4.8s ease-in-out infinite;
+  }
+
+  .action-link:nth-child(1) { animation-delay: 0s; }
+  .action-link:nth-child(2) { animation-delay: 1.6s; }
+  .action-link:nth-child(3) { animation-delay: 3.2s; }
+
+  .action-link:hover {
     background: var(--bk);
     color: var(--wt);
+    transform: translateY(-1px);
+    animation: none;
+  }
+
+  @keyframes cardLinkFlow {
+    0%, 100% {
+      background: transparent;
+      color: var(--bk);
+      border-color: var(--bk);
+    }
+    22% {
+      background: var(--yl);
+      color: var(--bk);
+      border-color: var(--yl);
+    }
+    50% {
+      background: var(--bk);
+      color: var(--wt);
+      border-color: var(--bk);
+    }
+    78% {
+      background: var(--yl);
+      color: var(--bk);
+      border-color: var(--yl);
+    }
   }
 </style>
