@@ -1,44 +1,64 @@
 export const designs = [
-  // {
-  //   slug: 'finance-dashboard-concept',
-  //   title: 'Finance Dashboard Concept',
-  //   desc: 'A clean financial overview dashboard with real-time analytics, spending breakdowns, and intuitive data visualization.',
-  //   details: 'This dashboard concept focuses on clarity and usability, giving users a comprehensive view of their financial health. It features interactive charts, category-based spending insights, and a responsive layout that works seamlessly across devices.',
-  //   date: '2025',
-  //   thumb: '/designs/pro1.png',
-  //   tags: ['Dashboard', 'Finance', 'Data Viz'],
-  //   src: '/UI-designs/uidesigns-1.pdf'
-  // },
   {
-    slug: 'fyfannual',
+    slug: '1',
     title: 'fyf annual report 2026',
-    desc: 'A modern shopping experience with streamlined product discovery, smooth checkout flow, and engaging product showcases.',
-    details: 'The redesign reimagines the mobile shopping journey with a focus on product discovery and conversion. Key improvements include a simplified navigation structure, rich product cards, and a frictionless checkout process that reduces cart abandonment.',
+    desc: 'A polished annual report visual designed to communicate programme progress, outcomes, and impact with clarity and authority.',
+    details: 'This annual report layout presents FYF programme highlights through a structured visual story, balancing data, milestones, and narrative messaging. The design focuses on readability, stakeholder-friendly presentation, and a professional tone that makes impact reporting feel clear, credible, and engaging.',
     date: '2025',
     thumb: '/UI-designs/uipng-1.png',
-    tags: ['E-Commerce', 'Mobile', 'UX'],
+    tags: ['Annual Report', 'Impact', 'UX'],
     src: '/UI-designs/ANNUAL-REPORT.pdf'
   },
-  // {
-  //   slug: 'travel-booking-platform',
-  //   title: 'Travel Booking Platform',
-  //   desc: 'An inspiring travel booking interface that combines stunning visuals with effortless trip planning and booking.',
-  //   details: 'Designed to inspire wanderlust, this platform blends beautiful destination imagery with a powerful booking engine. Users can explore curated destinations, compare options, and complete bookings in just a few taps — all within a visually immersive experience.',
-  //   date: '2024',
-  //   thumb: '/designs/pro4.png',
-  //   tags: ['Travel', 'Booking', 'Web App'],
-  //   src: '/UI-designs/uidesigns-3.pdf'
-  // },
-  // {
-  //   slug: 'health-tracker-mobile-app',
-  //   title: 'Health Tracker Mobile App',
-  //   desc: 'A wellness companion app for tracking activity, sleep, nutrition, and personal health goals in one place.',
-  //   details: 'This health tracker brings together activity logging, sleep analysis, nutrition tracking, and goal setting into a cohesive mobile experience. The interface uses calming colors, clear progress indicators, and personalized insights to keep users motivated on their wellness journey.',
-  //   date: '2024',
-  //   thumb: '/designs/pro5.png',
-  //   tags: ['Health', 'Mobile', 'Wellness'],
-  //   src: '/UI-designs/uidesign-4.pdf'
-  // }
+  {
+    slug: '2',
+    title: 'Youth Arise Webpage design',
+    desc: 'A clean campaign-focused webpage concept that presents Youth Arise with a clear, persuasive digital narrative and strong brand presence.',
+    details: 'This webpage design frames Youth Arise through a modern layout that balances programme storytelling, organisational credibility, and audience engagement. The structure is built to communicate key messages quickly while leaving room for strong calls to action, community trust, and polished visual identity.',
+    date: '2024',
+    thumb: '/UI-designs/uipng-2.png',
+    tags: ['Webpage', 'Campaign', 'Brand'],
+    src: '/UI-designs/uidesigns-3.pdf'
+  },
+  {
+    slug: '3',
+    title: 'Infrographic for an education programme',
+    desc: 'An infographic concept that translates education programme milestones and programme outcomes into a simple, audience-friendly visual story.',
+    details: 'This design communicates programme progress through a strong information hierarchy, clear labels, and intentionally grouped content blocks. It helps stakeholders understand key achievements and priorities at a glance, making educational reporting more accessible and easier to share across teams and audiences.',
+    date: '2024',
+    thumb: '/UI-designs/uipng-3.png',
+    tags: ['Infographic', 'Education', 'Reporting'],
+    src: '/UI-designs/uidesigns-3.pdf'
+  },
+  {
+    slug: '4',
+    title: 'Bronchure for the Transform Project',
+    desc: 'A brochure design that presents the Transform Project through a polished, branded print-ready layout with clear messaging and visual flow.',
+    details: 'This brochure concept is structured to introduce the Transform Project in a clean, professional way that supports both awareness and credibility. The layout organizes project information into an easy-to-follow narrative, helping audiences connect the programme’s purpose, goals, and value proposition at a glance.',
+    date: '2024',
+    thumb: '/UI-designs/uipng-4.png',
+    tags: ['Brochure', 'Transform Project', 'Print'],
+    src: '/UI-designs/uidesigns-3.pdf'
+  },
+  {
+    slug: '5',
+    title: 'Bronchure for the BEFIT Project',
+    desc: 'A brochure layout designed to communicate the BEFIT Project with clarity, consistency, and a strong organisational identity.',
+    details: 'The BEFIT brochure concept focuses on presentational readability and visual hierarchy, so the project’s key messages land quickly and professionally. It is shaped to support stakeholder communication by balancing concise text, clear structure, and persuasive visual design in a print-friendly format.',
+    date: '2024',
+    thumb: '/UI-designs/uipng-5.png',
+    tags: ['Brochure', 'BEFIT', 'Communication'],
+    src: '/UI-designs/uidesigns-3.pdf'
+  },
+  {
+    slug: '6',
+    title: 'Infrographic - Annual progress presentation',
+    desc: 'A presentation-ready infographic that captures annual progress in a concise, executive-friendly visual format.',
+    details: 'This annual progress design is tailored for presentation environments where performance needs to be communicated quickly and confidently. It presents key progress themes, indicators, and outcomes with a layout that promotes readability, storytelling, and polished stakeholder communication.',
+    date: '2024',
+    thumb: '/UI-designs/uipng-6.png',
+    tags: ['Infographic', 'Presentation', 'Progress'],
+    src: '/UI-designs/uidesigns-3.pdf'
+  },
 ];
 
 export function getDesignBySlug(slug) {

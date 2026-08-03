@@ -65,6 +65,30 @@
     color: var(--bk);
   }
 
+  @media (max-width: 719px) {
+    .card {
+      max-width: 100%;
+    }
+
+    .card-body {
+      padding: 12px 12px 8px;
+    }
+
+    .card-foot {
+      padding: 8px 12px;
+    }
+
+    .card-actions {
+      gap: 8px;
+      padding: 10px 12px 12px;
+    }
+
+    .action-link {
+      padding: 8px 12px;
+      font-size: 0.62rem;
+    }
+  }
+
   .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 36px rgba(0,0,0,0.12);

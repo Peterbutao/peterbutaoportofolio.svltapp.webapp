@@ -30,9 +30,29 @@
   .projects-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 12px;
     justify-content: center;
-    margin-bottom: 22px;
+    margin: 0 auto 18px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .projects-grid li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 720px) {
+    .projects-grid {
+      gap: 22px;
+    }
+
+    .projects-grid li {
+      width: auto;
+      max-width: 360px;
+      flex: 1 1 340px;
+    }
   }
 
   .view-all {

@@ -45,7 +45,7 @@
     display: flex;
     flex-direction: column;
     background: white;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.07);
     overflow: hidden;
     width: 100%;
@@ -67,18 +67,19 @@
 
   .card-thumb {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 16;
     background: linear-gradient(135deg, #f4f3ec 0%, #e6e3d6 100%);
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
   }
 
   .card-thumb img {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: top center;
     transition: transform 0.4s ease;
+    display: block;
   }
 
   .design-card:hover .card-thumb img { transform: scale(1.03); }

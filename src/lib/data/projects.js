@@ -5,7 +5,7 @@ export const projects = [
     desc: 'A responsive student timetable planner built to make academic scheduling clearer and easier to follow.',
     details: 'This app helps students view class schedules, organise weekly routines, and stay on top of academic commitments in one place. The experience is focused on clarity, speed, and a mobile-friendly workflow so important information is always easy to access.',
     date: '2025',
-    thumb: '/designs/pro.png',
+    thumb: '/Projects/pro.png',
     projecttype: "app",
     logoSrc: '',
     github: "https://github.com/Peterbutao/luanarapp-svelte-capacitor",
