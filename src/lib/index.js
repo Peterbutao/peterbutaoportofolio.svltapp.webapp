@@ -7,3 +7,4 @@ export { default as UIDesigns }     from './components/UIDesigns.svelte';
 export { default as Experience }    from './components/Experience.svelte';
 export { default as Services }      from './components/Services.svelte';
 export { default as Contacts }      from './components/Contacts.svelte';
+export { default as About }         from './components/About.svelte';

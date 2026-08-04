@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import Landingpage from '$lib/components/Landingpage.svelte';
   import Organisations from '$lib/components/Organisations.svelte';
@@ -9,95 +9,18 @@
   import Consultant from '$lib/components/Consultant.svelte';
   import Services from '$lib/components/Services.svelte';
   import Contacts from '$lib/components/Contacts.svelte';
-
-  /** @type {HTMLDivElement | null} */
-  let cursorRef;
-  /** @type {HTMLDivElement | null} */
-  let glassRef;
-  /** @type {HTMLDivElement | null} */
-  let glowRef;
-
-  /** @type {import('gsap').gsap | null} */
-  let gsap;
-
-  /** @type {(e: MouseEvent) => void} */
-  function onPageMove(e) {
-    if (!gsap || !cursorRef) return;
-    gsap.to(cursorRef, { x: e.clientX, y: e.clientY, scale: 1, duration: 0.35, ease: 'power3.out' });
-  }
-
-  function onPageLeave() {
-    if (!gsap || !cursorRef) return;
-    gsap.to(cursorRef, { scale: 0, duration: 0.25, ease: 'power2.out' });
-  }
-
-  /** @type {(e: MouseEvent) => void} */
-  function onGlassMove(e) {
-    if (!gsap || !glassRef || !glowRef) return;
-    const r = glassRef.getBoundingClientRect();
-    const x = e.clientX - r.left;
-    const y = e.clientY - r.top;
-
-    gsap.to(glassRef, {
-      rotateX: ((y - r.height / 2) / r.height) * -6,
-      rotateY: ((x - r.width / 2) / r.width) * 8,
-      duration: 0.45,
-      ease: 'power2.out'
-    });
-
-    gsap.to(glowRef, {
-      x: x - r.width / 2,
-      y: y - r.height / 2,
-      duration: 0.45,
-      ease: 'power2.out'
-    });
-  }
-
-  function onGlassLeave() {
-    if (!gsap || !glassRef || !glowRef) return;
-    gsap.to(glassRef, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
-    gsap.to(glowRef, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
-  }
-
-  /** @type {(mode: 'default' | 'active') => void} */
-  function setCursorMode(mode) {
-    if (!gsap || !cursorRef) return;
-    cursorRef.classList.toggle('is-active', mode === 'active');
-    gsap.to(cursorRef, {
-      scale: mode === 'active' ? 1.7 : 1,
-      duration: 0.25,
-      ease: 'power2.out'
-    });
-  }
-
-  onMount(async () => {
-    const mod = await import('gsap');
-    gsap = mod.default;
-    gsap.set(cursorRef, { xPercent: -50, yPercent: -50, x: window.innerWidth / 2, y: window.innerHeight / 2, scale: 0 });
-
-    const hoverTargets = Array.from(document.querySelectorAll('a, button, .page-section, .page-glass'));
-    hoverTargets.forEach((target) => {
-      target.addEventListener('mouseenter', () => setCursorMode('active'));
-      target.addEventListener('mouseleave', () => setCursorMode('default'));
-    });
-  });
 </script>
 
-<div class="page-wrapper" role="presentation" onmousemove={onPageMove} onmouseleave={onPageLeave}>
+<div class="page-wrapper" role="presentation">
   <div class="blob-layer" aria-hidden="true">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
     <div class="blob b3"></div>
-    <div class="blob b4"></div>
-    <div class="blob b5"></div>
-    <div class="blob b6"></div>
     <div class="blob w1"></div>
     <div class="blob w2"></div>
-    <div class="blob w3"></div>
   </div>
 
-  <div class="page-glass" role="presentation" bind:this={glassRef} onmousemove={onGlassMove} onmouseleave={onGlassLeave}>
-    <div class="glass-glow" bind:this={glowRef} aria-hidden="true"></div>
+  <div class="page-glass" role="presentation">
     <div class="glass-inner">
       <section id="hero">
       <Landingpage />
@@ -133,22 +56,18 @@
       </section>
     </div>
   </div>
-
-  <div class="cursor-blob" bind:this={cursorRef} aria-hidden="true">
-    <span class="cursor-icon cursor-arrow">↗</span>
-    <span class="cursor-icon cursor-spark">✦</span>
-  </div>
 </div>
 
 <style>
   .page-wrapper {
     position: relative;
     min-height: 100vh;
+    margin-top: 0;
+    padding-top: 0;
     background:
       radial-gradient(140% 90% at 15% 0%, #fff8d6 0%, transparent 55%),
       radial-gradient(130% 90% at 90% 100%, #fff1bd 0%, transparent 50%),
       var(--wt);
-    cursor: none;
   }
 
   /* ─── BLOB LAYER (fixed behind the glass) ─── */
@@ -163,11 +82,23 @@
   .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(42px);
+    filter: blur(32px);
     will-change: transform;
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blob {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .blob {
+      animation-duration: 25s;
+    }
   }
 
   .b1 {
@@ -201,16 +132,6 @@
   }
 
   .b4 {
-    bottom: 8%; right: 4%;
-    width: 340px; height: 340px;
-    background: #ffcc00;
-    opacity: 0.55;
-    animation-name: blobTravelB;
-    animation-duration: 11s;
-    animation-delay: -18s;
-  }
-
-  .b5 {
     top: 62%; right: -14%;
     width: 300px; height: 300px;
     background: #ffe066;
@@ -218,16 +139,6 @@
     animation-name: blobTravelA;
     animation-duration: 12s;
     animation-delay: -9s;
-  }
-
-  .b6 {
-    bottom: -12%; left: 30%;
-    width: 360px; height: 360px;
-    background: radial-gradient(circle at 40% 60%, #ffd633, #ffc200 60%, #f0b400);
-    opacity: 0.5;
-    animation-name: blobTravelC;
-    animation-duration: 13s;
-    animation-delay: -15s;
   }
 
   .w1 {
@@ -250,15 +161,7 @@
     animation-delay: -10s;
   }
 
-  .w3 {
-    bottom: 4%; right: 20%;
-    width: 180px; height: 180px;
-    background: radial-gradient(circle at 45% 45%, rgba(255,255,255,0.86), rgba(255,255,255,0.58) 65%, rgba(255,255,255,0.12));
-    opacity: 0.88;
-    animation-name: whiteTravelC;
-    animation-duration: 13s;
-    animation-delay: -8s;
-  }
+
 
   @keyframes blobTravelA {
     0%   { transform: translate3d(0, 0, 0) scale(1); }
@@ -296,17 +199,13 @@
     100% { transform: translate3d(0, 0, 0) scale(1); }
   }
 
-  @keyframes whiteTravelC {
-    0%   { transform: translate3d(0, 0, 0) scale(1); }
-    50%  { transform: translate3d(-14vw, -16vh, 0) scale(1.12); }
-    100% { transform: translate3d(0, 0, 0) scale(1); }
-  }
-
   /* ─── FULL-BLEED GLASS ─── */
   .page-glass {
     position: relative;
     z-index: 1;
     min-height: 100vh;
+    margin-top: 0;
+    padding-top: 0;
     background: linear-gradient(rgba(250, 250, 248, 0.68), rgba(250, 250, 248, 0.52));
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -339,71 +238,15 @@
     z-index: 1;
     width: min(100%, 1100px);
     margin: 0 auto;
-    padding: 6px 0 14px;
-  }
-
-  .cursor-blob {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 80;
-    background: radial-gradient(circle, rgba(255, 204, 0, 0.92), rgba(255, 204, 0, 0) 72%);
-    filter: blur(2px);
-    opacity: 0.9;
-    will-change: transform;
-  }
-
-  .cursor-icon {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    font-size: 0.8rem;
-    font-weight: 700;
-    line-height: 1;
-    color: var(--bk);
-    transition: opacity 0.2s ease;
-  }
-
-  .cursor-spark {
-    color: var(--bk);
-    opacity: 0;
-    transform: scale(0.9);
-  }
-
-  :global(.cursor-blob.is-active .cursor-arrow) {
-    opacity: 0;
-  }
-
-  :global(.cursor-blob.is-active .cursor-spark) {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  @media (pointer: coarse) {
-    .page-wrapper {
-      cursor: auto;
-    }
-
-    .cursor-blob {
-      display: none;
-    }
+    padding: 0 0 14px;
   }
 
   @media (max-width: 720px) {
     .b1 { width: 150px; height: 150px; }
     .b2 { width: 190px; height: 190px; }
     .b3 { width: 140px; height: 140px; }
-    .b4 { width: 170px; height: 170px; }
-    .b5 { width: 150px; height: 150px; }
-    .b6 { width: 180px; height: 180px; }
     .w1 { width: 120px; height: 120px; }
     .w2 { width: 140px; height: 140px; }
-    .w3 { width: 110px; height: 110px; }
   }
 
   @media (prefers-reduced-motion: reduce) {

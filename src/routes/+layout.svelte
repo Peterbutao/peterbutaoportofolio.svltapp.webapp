@@ -1,6 +1,9 @@
-<script>
+<script lang="ts">
   import '../app.css';
   import { onMount } from 'svelte';
+  import { siteConfig } from '$lib/config/site';
+  import { generateMetaTags, generatePersonSchema } from '$lib/utils/seo';
+  import { addScreenReaderOnlyStyles, setupKeyboardNavigation } from '$lib/utils/accessibility';
 
   let { children } = $props();
 
@@ -11,7 +14,6 @@
     { label: 'About',       href: '/about' },
     { label: 'UI Designs',  href: '/UI/UX-designs' },
     { label: 'Projects',    href: '/projects' },
-    { label: 'Experience',  href: '/experience' },
     { label: 'Services',    href: '/services' },
     { label: 'Contact',     href: '/contact' },
   ];
@@ -19,16 +21,67 @@
   function toggleMenu() { menuOpen = !menuOpen; }
   function closeMenu() { menuOpen = false; }
 
+  const metaTags = generateMetaTags({
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url
+  });
+
+  const personSchema = generatePersonSchema();
+
   onMount(() => {
-    const onScroll = () => { scrolled = window.scrollY > 10; };
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          scrolled = window.scrollY > 10;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Initialize accessibility features
+    addScreenReaderOnlyStyles();
+    setupKeyboardNavigation();
+    
     return () => window.removeEventListener('scroll', onScroll);
   });
 </script>
 
 <svelte:head>
-  <title>Peter Rodrigues Butao — Portfolio</title>
-  <meta name="description" content="Project Development Specialist, Web Designer & Software Developer based in Malawi." />
+  <title>{metaTags.title}</title>
+  <meta name="description" content={metaTags.description} />
+  
+  <!-- Preload critical assets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content={metaTags['og:type']} />
+  <meta property="og:url" content={metaTags['og:url']} />
+  <meta property="og:title" content={metaTags['og:title']} />
+  <meta property="og:description" content={metaTags['og:description']} />
+  <meta property="og:image" content={metaTags['og:image']} />
+  <meta property="og:site_name" content={metaTags['og:site_name']} />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content={metaTags['twitter:card']} />
+  <meta property="twitter:url" content={metaTags['og:url']} />
+  <meta property="twitter:title" content={metaTags['twitter:title']} />
+  <meta property="twitter:description" content={metaTags['twitter:description']} />
+  <meta property="twitter:image" content={metaTags['twitter:image']} />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {JSON.stringify(personSchema)}
+  </script>
+  
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content={siteConfig.name} />
+  <link rel="canonical" href={siteConfig.url} />
 </svelte:head>
 
 <div class="layout" class:scrolled>
@@ -65,7 +118,9 @@
     {/if}
   </nav>
 
-  <main>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <main id="main-content">
     {@render children()}
   </main>
 
@@ -116,6 +171,7 @@
     font-size: 1rem;
     letter-spacing: 0.1em;
     color: var(--bk);
+    white-space: nowrap;
   }
 
   .nav-links {
@@ -251,7 +307,7 @@
   /* ─── MAIN ─── */
   main {
     flex: 1;
-    padding-top: var(--nav-h);
+    padding-top: 0;
   }
 
   /* ─── FOOTER ─── */

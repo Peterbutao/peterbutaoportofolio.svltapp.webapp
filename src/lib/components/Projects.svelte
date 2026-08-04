@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Card from './Card.svelte';
   import { projects } from '$lib/data/projects';
 </script>

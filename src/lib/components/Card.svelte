@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * Props:
    *   title        — project title
@@ -10,13 +10,13 @@
    *   projectHref  — external live project URL
    *   logoSrc      — small logo src (optional)
    */
-  export let title       = 'Project Title';
-  export let desc        = 'Short description of this project and the technologies used.';
-  export let date        = '2024';
-  export let thumb       = '';
-  export let aboutHref   = '/';
-  export let githubHref  = '';
-  export let projectHref = '';
+  export let title: string = 'Project Title';
+  export let desc: string = 'Short description of this project and the technologies used.';
+  export let date: string = '2024';
+  export let thumb: string = '';
+  export let aboutHref: string = '/';
+  export let githubHref: string = '';
+  export let projectHref: string = '';
 </script>
 
 <article class="card">

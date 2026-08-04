@@ -1,3 +1,6 @@
 User-agent: *
 Allow: /
+
+Disallow: /UI-designs/*.pdf
+
 Sitemap: https://peterbutao.pages.dev/sitemap.xml

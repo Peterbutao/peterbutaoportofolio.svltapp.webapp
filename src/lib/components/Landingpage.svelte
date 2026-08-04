@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { debounce } from '$lib/utils/animations';
 
   let visible = $state(false);
   let profileRing: HTMLElement;
@@ -66,12 +67,14 @@
           delay: 0.5 + i * 0.1
         });
 
-        el.addEventListener('mousemove', (e) => {
+        const debouncedMouseMove = debounce((e: MouseEvent) => {
           const rect = el.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width / 2;
           const y = e.clientY - rect.top - rect.height / 2;
           gsap.to(el, { x: x * 0.2, y: y * 0.2, duration: 0.3, ease: 'power2.out' });
-        });
+        }, 16);
+
+        el.addEventListener('mousemove', debouncedMouseMove);
 
         el.addEventListener('mouseleave', () => {
           gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });

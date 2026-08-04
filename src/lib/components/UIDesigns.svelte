@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { designs } from '$lib/data/designs';
 </script>
 

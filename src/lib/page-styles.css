@@ -1,0 +1,296 @@
+/* ─── SHARED PAGE STYLES ─────────────────────────────────────── */
+/* These styles are shared across: UI/UX designs, projects, services, contact, and error pages */
+
+.page {
+  position: relative;
+  min-height: calc(100vh - var(--nav-h));
+  padding: 72px 20px 96px;
+  overflow: hidden;
+  cursor: none;
+  background:
+    radial-gradient(120% 90% at 12% 0%, #fff8d6 0%, transparent 55%),
+    radial-gradient(120% 90% at 90% 100%, #fff1bd 0%, transparent 50%),
+    var(--wt);
+}
+
+/* ─── BLOB LAYER ─── */
+.blob-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.b1 {
+  top: -10%; left: -8%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle at 35% 35%, #fff0a8, #ffcc00 62%, #f0b400);
+  opacity: 0.6;
+  animation-name: travelA;
+  animation-duration: 17s;
+  animation-delay: -6s;
+}
+
+.b2 {
+  top: 10%; right: -10%;
+  width: 340px; height: 340px;
+  background: #ffd43b;
+  opacity: 0.5;
+  animation-name: travelB;
+  animation-duration: 22s;
+  animation-delay: -12s;
+}
+
+.b3 {
+  bottom: 4%; right: 6%;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle at 60% 40%, #ffe680, #f5b800 65%, #e0a200);
+  opacity: 0.5;
+  animation-name: travelC;
+  animation-duration: 15s;
+  animation-delay: -4s;
+}
+
+.b4 {
+  top: 44%; left: -12%;
+  width: 260px; height: 260px;
+  background: #ffcc00;
+  opacity: 0.55;
+  animation-name: travelB;
+  animation-duration: 12s;
+  animation-delay: -17s;
+}
+
+.b5 {
+  bottom: -12%; left: 24%;
+  width: 360px; height: 360px;
+  background: #ffe066;
+  opacity: 0.45;
+  animation-name: travelA;
+  animation-duration: 13s;
+  animation-delay: -9s;
+}
+
+.w1 {
+  top: 6%; left: 28%;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.96), rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.2));
+  opacity: 0.8;
+  animation-name: whiteA;
+  animation-duration: 14s;
+  animation-delay: -2s;
+}
+
+.w2 {
+  bottom: 8%; right: 22%;
+  width: 240px; height: 240px;
+  background: radial-gradient(circle at 65% 65%, rgba(255,255,255,0.94), rgba(255,255,255,0.65) 55%, rgba(255,255,255,0.15));
+  opacity: 0.75;
+  animation-name: whiteB;
+  animation-duration: 18s;
+  animation-delay: -8s;
+}
+
+.paper {
+  position: absolute;
+  border-radius: 2px;
+  opacity: 0.12;
+  transform: rotate(-45deg);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+.p1 {
+  top: 18%; left: 8%;
+  width: 90px; height: 120px;
+  background: linear-gradient(135deg, #fff8dc, #faebd7);
+  animation: paperFloatA 25s ease-in-out infinite alternate;
+}
+
+.p2 {
+  top: 62%; right: 12%;
+  width: 70px; height: 95px;
+  background: linear-gradient(135deg, #ffefd5, #ffe4c4);
+  animation: paperFloatB 22s ease-in-out infinite alternate;
+  animation-delay: -5s;
+}
+
+.p3 {
+  bottom: 16%; left: 18%;
+  width: 85px; height: 110px;
+  background: linear-gradient(135deg, #fffacd, #f0e68c);
+  animation: paperFloatA 28s ease-in-out infinite alternate;
+  animation-delay: -10s;
+}
+
+.p4 {
+  top: 32%; right: 28%;
+  width: 60px; height: 80px;
+  background: linear-gradient(135deg, #faf0e6, #ffe4b5);
+  animation: paperFloatB 20s ease-in-out infinite alternate;
+  animation-delay: -15s;
+}
+
+/* ─── GLASS CARD ─── */
+.glass {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+  padding: 40px 32px 48px;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+}
+
+.glow {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 204, 0, 0.18), transparent 55%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+  z-index: 0;
+}
+
+/* ─── TYPOGRAPHY ─── */
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+
+.code-wrap {
+  position: relative;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.code-shadow {
+  position: absolute;
+  top: 2px; left: 2px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.code {
+  position: relative;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  z-index: 1;
+  transition: color 0.25s;
+}
+
+.code:hover {
+  color: var(--yl);
+}
+
+.sub {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--gray);
+  margin-bottom: 12px;
+  max-width: 600px;
+}
+
+.tease {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #9ca3af;
+  margin-bottom: 24px;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+.cursor-blob {
+  position: fixed;
+  top: 0; left: 0;
+  width: 16px; height: 16px;
+  background: radial-gradient(circle, var(--yl) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes travelA {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.1); }
+  100% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+@keyframes travelB {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-35px, 25px) scale(1.05); }
+  100% { transform: translate(30px, -15px) scale(1); }
+}
+
+@keyframes travelC {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(25px, 35px) scale(1.08); }
+  100% { transform: translate(-15px, -25px) scale(0.97); }
+}
+
+@keyframes whiteA {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-20px, 15px) scale(1.1); }
+  100% { transform: translate(15px, -10px) scale(0.95); }
+}
+
+@keyframes whiteB {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.05); }
+  100% { transform: translate(-25px, 10px) scale(1); }
+}
+
+@keyframes paperFloatA {
+  0% { transform: rotate(-45deg) translate(0, 0); }
+  50% { transform: rotate(-40deg) translate(8px, -12px); }
+  100% { transform: rotate(-50deg) translate(-6px, 10px); }
+}
+
+@keyframes paperFloatB {
+  0% { transform: rotate(-45deg) translate(0, 0); }
+  50% { transform: rotate(-48deg) translate(-10px, 8px); }
+  100% { transform: rotate(-42deg) translate(12px, -6px); }
+}
+
+/* ─── ERROR PAGE OVERRIDE ─── */
+.page.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}

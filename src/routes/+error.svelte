@@ -1,15 +1,32 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { page } from '$app/state';
+  import '$lib/page-styles.css';
+  import { 
+    initCursorAnimation, 
+    onPageMove, 
+    onPageLeave, 
+    onGlassMove, 
+    onGlassLeave,
+    magnet,
+    unMagnet,
+    codeEntrance,
+    staggeredEntrance,
+    debounce
+  } from '$lib/utils/animations';
 
-  /** @type {import('gsap').gsap | null} */
-  let gsap;
+  let gsap: import('gsap').gsap | null = null;
+  let cardRef: HTMLDivElement | null = null;
+  let codeWrap: HTMLDivElement | null = null;
+  let codeRef: HTMLDivElement | null = null;
+  let glowRef: HTMLDivElement | null = null;
+  let btnRef: HTMLAnchorElement | null = null;
+  let cursorRef: HTMLDivElement | null = null;
 
   let status = $derived(page.status);
   let message = $derived(page.error?.message ?? 'Something went wrong.');
 
-  /** @type {Record<number, { label: string; sub: string }>} */
-  const copy = {
+  const copy: Record<number, { label: string; sub: string }> = {
     404: {
       label: 'LOST IN THE BLUR',
       sub: 'This page drifted off the map. Let\'s get you back to solid ground.'
@@ -50,70 +67,9 @@
   ];
   let tease = $state(teases[0]);
 
-  /** @type {HTMLDivElement | null} */
-  let cardRef;
-  /** @type {HTMLDivElement | null} */
-  let codeWrap;
-  /** @type {HTMLDivElement | null} */
-  let codeRef;
-  /** @type {HTMLDivElement | null} */
-  let glowRef;
-  /** @type {HTMLAnchorElement | null} */
-  let btnRef;
-  /** @type {HTMLDivElement | null} */
-  let cursorRef;
-
-  /** @param {MouseEvent} e */
-  function onPageMove(e) {
-    if (!gsap || !cursorRef) return;
-    gsap.to(cursorRef, { x: e.clientX, y: e.clientY, scale: 1, duration: 0.45, ease: 'power3.out' });
-  }
-
-  function onPageLeave() {
-    if (!gsap || !cursorRef) return;
-    gsap.to(cursorRef, { scale: 0, duration: 0.4, ease: 'power2.out' });
-  }
-
-  /** @param {MouseEvent} e */
-  function onMove(e) {
-    if (!gsap || !cardRef || !glowRef || !cursorRef) return;
-    const r = cardRef.getBoundingClientRect();
-    const x = e.clientX - r.left;
-    const y = e.clientY - r.top;
-    gsap.to(cardRef, {
-      rotateX: ((y - r.height / 2) / r.height) * 10,
-      rotateY: ((x - r.width / 2) / r.width) * -10,
-      transformPerspective: 900,
-      duration: 0.6,
-      ease: 'power2.out'
-    });
-    gsap.to(glowRef, { x: x - r.width / 2, y: y - r.height / 2, duration: 0.6, ease: 'power2.out' });
-    gsap.to(cursorRef, { scale: 1.7, duration: 0.3, ease: 'power2.out' });
-  }
-
-  function onLeave() {
-    if (!gsap || !cardRef || !glowRef || !cursorRef) return;
-    gsap.to(cardRef, { rotateX: 0, rotateY: 0, duration: 0.9, ease: 'elastic.out(1,0.5)' });
-    gsap.to(glowRef, { x: 0, y: 0, duration: 0.8, ease: 'power3.out' });
-    gsap.to(cursorRef, { scale: 1, duration: 0.3, ease: 'power2.out' });
-  }
-
-  /** @param {MouseEvent} e */
-  function magnet(e) {
-    if (!gsap || !btnRef) return;
-    const r = btnRef.getBoundingClientRect();
-    gsap.to(btnRef, {
-      x: (e.clientX - r.left - r.width / 2) * 0.35,
-      y: (e.clientY - r.top - r.height / 2) * 0.35,
-      duration: 0.4,
-      ease: 'power3.out'
-    });
-  }
-
-  function unMagnet() {
-    if (!gsap || !btnRef) return;
-    gsap.to(btnRef, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1,0.4)' });
-  }
+  const debouncedPageMove = debounce((e: MouseEvent) => {
+    onPageMove(gsap, cursorRef, e);
+  }, 16);
 
   function shake() {
     if (!gsap || !codeRef) return;
@@ -139,21 +95,10 @@
     const mod = await import('gsap');
     gsap = mod.default;
     if (!cursorRef || !codeWrap || !cardRef) return;
-    gsap.set(cursorRef, { xPercent: -50, yPercent: -50, x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    initCursorAnimation(gsap, cursorRef);
 
-    const tl = gsap.timeline();
-    tl.fromTo(
-      codeWrap,
-      { opacity: 0, scale: 2.2, y: -40, rotate: -12 },
-      { opacity: 1, scale: 1, y: 0, rotate: 0, duration: 1.2, ease: 'elastic.out(1,0.5)' },
-      0.1
-    );
-    tl.fromTo(
-      cardRef.querySelectorAll('[data-stagger]'),
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: 0.6, stagger: 0.08 },
-      0.55
-    );
+    codeEntrance(gsap, codeWrap, { duration: 1.2 });
+    staggeredEntrance(gsap, cardRef.querySelectorAll('[data-stagger]'), { delay: 0.55, stagger: 0.08 });
   });
 </script>
 
@@ -161,7 +106,7 @@
   <title>{meta.code} — {meta.label}</title>
 </svelte:head>
 
-<div class="page" role="presentation" onmousemove={onPageMove} onmouseleave={onPageLeave}>
+<div class="page centered" role="presentation" onmousemove={debouncedPageMove} onmouseleave={() => onPageLeave(gsap, cursorRef)}>
   <div class="blob-layer" aria-hidden="true">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
@@ -177,7 +122,7 @@
   </div>
 
   <div class="glass">
-    <div class="card" role="presentation" bind:this={cardRef} onmousemove={onMove} onmouseleave={onLeave}>
+    <div class="card" role="presentation" bind:this={cardRef} onmousemove={(e) => onGlassMove(gsap, cardRef, glowRef, cursorRef, e, { duration: 0.6 })} onmouseleave={() => onGlassLeave(gsap, cardRef, glowRef, cursorRef)}>
       <div class="glow" bind:this={glowRef} aria-hidden="true"></div>
 
       <p class="eyebrow" data-stagger>SYSTEM STATUS</p>
@@ -197,8 +142,8 @@
         class="btn"
         bind:this={btnRef}
         data-stagger
-        onmousemove={magnet}
-        onmouseleave={unMagnet}
+        onmousemove={(e) => magnet(gsap, e.currentTarget as HTMLAnchorElement, e)}
+        onmouseleave={() => unMagnet(gsap, e.currentTarget as HTMLAnchorElement)}
       >BACK TO HOME</a>
     </div>
   </div>
