@@ -5,7 +5,7 @@
 
 <article class="project-page">
   <div class="project-header">
-    <img class="project-thumb" src={project.thumb} alt={project.title} />
+    <img class="project-thumb" src={project.thumb} alt={project.title} decoding="async" />
     <div class="project-meta">
       <span class="project-date">{project.date}</span>
       <h1>{project.title}</h1>

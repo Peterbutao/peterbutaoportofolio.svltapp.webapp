@@ -63,7 +63,7 @@
         </div>
         <!-- QR placeholder — replace src with your real QR code in /static/qr.png -->
         <div class="biz-qr">
-          <img src="/qr.png" alt="QR Code" />
+          <img src="/qr.png" alt="QR Code" loading="lazy" decoding="async" />
           <div class="qr-fallback">QR</div>
         </div>
       </div>

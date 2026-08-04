@@ -12,7 +12,7 @@
       <a href={d.src} target="_blank" rel="noopener" class="design-card">
         <div class="card-thumb">
           {#if d.thumb}
-            <img src={d.thumb} alt={d.title} />
+            <img src={d.thumb} alt={d.title} loading="lazy" decoding="async" />
           {:else}
             <span class="thumb-label">{d.title}</span>
           {/if}

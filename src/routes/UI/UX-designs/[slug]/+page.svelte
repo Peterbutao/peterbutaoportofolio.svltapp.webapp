@@ -5,7 +5,7 @@
 
 <article class="design-page">
   <div class="design-header">
-    <img class="design-thumb" src={design.thumb} alt={design.title} />
+    <img class="design-thumb" src={design.thumb} alt={design.title} decoding="async" />
     <div class="design-meta">
       <span class="design-date">{design.date}</span>
       <h1>{design.title}</h1>

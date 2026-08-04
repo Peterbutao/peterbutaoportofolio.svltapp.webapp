@@ -6,7 +6,7 @@
   <div class="community-card">
     <div class="community-img">
       <!-- Place community/volunteer image at /static/community.jpg -->
-      <img src="/community/community.jpg" alt="Community Leadership" />
+      <img src="/community/community.jpg" alt="Community Leadership" loading="lazy" decoding="async" />
       <div class="img-fallback">Community</div>
     </div>
     <h3>Community Leadership</h3>
@@ -149,5 +149,11 @@
     
     /* Pause 2 */
     80%, 100% { transform: translateX(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .li-badge {
+      animation: none;
+    }
   }
 </style>

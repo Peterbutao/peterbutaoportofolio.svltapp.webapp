@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import gsap from 'gsap';
 
   let visible = $state(false);
   let profileRing: HTMLElement;
@@ -10,7 +9,8 @@
   let role4: HTMLElement;
   let role5: HTMLElement;
 
-  onMount(() => {
+  onMount(async () => {
+    const gsap = (await import('gsap')).default;
     setTimeout(() => {
       visible = true;
       
@@ -80,7 +80,7 @@
     <div class="profile-wrap">
       <div class="profile-ring" bind:this={profileRing}>
         <!-- Place your photo at /static/profile.png -->
-        <img src="/profile.png" alt="Peter Rodrigues Butao"  />
+        <img src="/profile.png" alt="Peter Rodrigues Butao" fetchpriority="high" decoding="async" />
         <div class="avatar-fallback">PRB</div>
       </div>
     </div>

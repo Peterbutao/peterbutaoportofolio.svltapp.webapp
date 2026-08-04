@@ -47,7 +47,7 @@
                 <div class="carousel-track" style={`transform: translateX(-${(activeSlideById[d.slug] ?? 0) * 100}%);`}>
                   {#each carouselMap[d.slug] ?? [d.thumb] as slide}
                     <div class="carousel-slide">
-                      <img src={slide} alt={d.title} />
+                      <img src={slide} alt={d.title} loading="lazy" decoding="async" />
                     </div>
                   {/each}
                 </div>

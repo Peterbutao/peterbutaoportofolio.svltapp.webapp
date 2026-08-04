@@ -38,6 +38,8 @@
         <img
           src={org.src}
           alt={org.name}
+          loading="lazy"
+          decoding="async"
           on:error={handleImageError}
         />
         <span class="fallback">{org.name}</span>

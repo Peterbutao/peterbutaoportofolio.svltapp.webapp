@@ -24,7 +24,7 @@
   <a href={aboutHref} class="card-thumb-link" aria-label={`View ${title}`}>
     <div class="card-thumb">
       {#if thumb}
-        <img src={thumb} alt={title} />
+        <img src={thumb} alt={title} loading="lazy" decoding="async" />
       {:else}
         <span class="thumb-label">{title}</span>
       {/if}
@@ -200,7 +200,7 @@
     letter-spacing: 0.06em;
     transition: background 0.2s, color 0.2s, transform 0.2s ease;
     text-decoration: none;
-    animation: cardLinkFlow 4.8s ease-in-out infinite;
+    animation: cardLinkFlow 4.8s ease-in-out 2;
   }
 
   .action-link:nth-child(1) { animation-delay: 0s; }

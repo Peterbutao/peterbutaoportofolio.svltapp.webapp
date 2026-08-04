@@ -6,12 +6,12 @@
   <div class="consultant-card">
     <div class="logo-marquee" aria-hidden="true">
       <div class="logo-track">
-        <div class="logo-pill"><img src="/logo.png" alt="logo" /></div>
-        <div class="logo-pill"><img src="/logo (1).png" alt="logo" /></div>
-        <div class="logo-pill"><img src="/logo (2).png" alt="logo" /></div>
-        <div class="logo-pill"><img src="/logo.png" alt="logo" /></div>
-        <div class="logo-pill"><img src="/logo (1).png" alt="logo" /></div>
-        <div class="logo-pill"><img src="/logo (2).png" alt="logo" /></div>
+        <div class="logo-pill"><img src="/logo.png" alt="logo" loading="lazy" decoding="async" /></div>
+        <div class="logo-pill"><img src="/logo (1).png" alt="logo" loading="lazy" decoding="async" /></div>
+        <div class="logo-pill"><img src="/logo (2).png" alt="logo" loading="lazy" decoding="async" /></div>
+        <div class="logo-pill"><img src="/logo.png" alt="logo" loading="lazy" decoding="async" /></div>
+        <div class="logo-pill"><img src="/logo (1).png" alt="logo" loading="lazy" decoding="async" /></div>
+        <div class="logo-pill"><img src="/logo (2).png" alt="logo" loading="lazy" decoding="async" /></div>
       </div>
     </div>
     <h3>Monitoring & Evaluation</h3>
@@ -229,5 +229,13 @@
   .consultant-btn .li-badge svg {
     fill: white;
     width: 11px; height: 11px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-track,
+    .logo-pill,
+    .logo-pill img {
+      animation: none;
+    }
   }
 </style>

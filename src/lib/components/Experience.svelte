@@ -1,26 +1,5 @@
 <script>
-  /**
-   * Add/edit your work experience entries here.
-   * img: place images in /static/work/
-   */
-  const experiences = [
-    {
-      org:    'Forest Landscape Restoration — FAO',
-      role:   'Project Field Officer',
-      label:  'Field Role',
-      desc:   'Worked with FAO on forest landscape restoration initiatives, supporting project implementation, stakeholder engagement, and field monitoring across sites in Malawi.',
-      img:    '/work/work1.jpg',
-      href:   'https://www.linkedin.com/in/peterethanbutao',
-    },
-    {
-      org:    'BEFIT IWW',
-      role:   'School Performance Officer',
-      label:  'Education Role',
-      desc:   'Led school performance monitoring and data collection for BEFIT IWW, contributing to improved educational outcomes through evidence-based reporting and field support.',
-      img:    '/work/work1.jpg',
-      href:   'https://www.linkedin.com/in/peterethanbutao',
-    },
-  ];
+  import { experiences } from '$lib/data/experiences';
 </script>
 
 <div class="section-label">Career</div>
@@ -34,7 +13,8 @@
         <img
           src={exp.img}
           alt={exp.org}
-         
+          loading="lazy"
+          decoding="async"
         />
         <div class="img-fallback">{exp.org}</div>
       </div>
@@ -57,14 +37,21 @@
 
 <style>
   .exp-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  @media (min-width: 760px) {
+    .exp-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+    }
   }
 
   .exp-card {
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     background: white;
     transition: border-color 0.2s, box-shadow 0.2s;

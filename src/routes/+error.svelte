@@ -138,7 +138,7 @@
   <title>{meta.code} — {meta.label}</title>
 </svelte:head>
 
-<div class="page" onmousemove={onPageMove} onmouseleave={onPageLeave}>
+<div class="page" role="presentation" onmousemove={onPageMove} onmouseleave={onPageLeave}>
   <div class="blob-layer" aria-hidden="true">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
@@ -154,14 +154,14 @@
   </div>
 
   <div class="glass">
-    <div class="card" bind:this={cardRef} onmousemove={onMove} onmouseleave={onLeave}>
+    <div class="card" role="presentation" bind:this={cardRef} onmousemove={onMove} onmouseleave={onLeave}>
       <div class="glow" bind:this={glowRef} aria-hidden="true"></div>
 
       <p class="eyebrow" data-stagger>SYSTEM STATUS</p>
 
       <div class="code-wrap" bind:this={codeWrap} data-stagger>
         <div class="code-shadow" aria-hidden="true">{meta.code}</div>
-        <div class="code" bind:this={codeRef} onclick={shake} title="Click me">{meta.code}</div>
+        <div class="code" role="button" tabindex="0" bind:this={codeRef} onclick={shake} onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); shake(); } }} title="Click me">{meta.code}</div>
       </div>
 
       <h1 data-stagger>{meta.label}</h1>

@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from 'svelte';
+  import gsap from 'gsap';
   import Landingpage from '$lib/components/Landingpage.svelte';
   import Organisations from '$lib/components/Organisations.svelte';
   import UIDesigns from '$lib/components/UIDesigns.svelte';
@@ -8,9 +10,77 @@
   import Consultant from '$lib/components/Consultant.svelte';
   import Services from '$lib/components/Services.svelte';
   import Contacts from '$lib/components/Contacts.svelte';
+
+  /** @type {HTMLDivElement | null} */
+  /** @type {HTMLDivElement | null} */
+  let cursorRef;
+  /** @type {HTMLDivElement | null} */
+  let glassRef;
+  /** @type {HTMLDivElement | null} */
+  let glowRef;
+
+  /** @type {(e: MouseEvent) => void} */
+  function onPageMove(e) {
+    if (!cursorRef) return;
+    gsap.to(cursorRef, { x: e.clientX, y: e.clientY, scale: 1, duration: 0.35, ease: 'power3.out' });
+  }
+
+  function onPageLeave() {
+    if (!cursorRef) return;
+    gsap.to(cursorRef, { scale: 0, duration: 0.25, ease: 'power2.out' });
+  }
+
+  /** @type {(e: MouseEvent) => void} */
+  function onGlassMove(e) {
+    if (!glassRef || !glowRef) return;
+    const r = glassRef.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+
+    gsap.to(glassRef, {
+      rotateX: ((y - r.height / 2) / r.height) * -6,
+      rotateY: ((x - r.width / 2) / r.width) * 8,
+      duration: 0.45,
+      ease: 'power2.out'
+    });
+
+    gsap.to(glowRef, {
+      x: x - r.width / 2,
+      y: y - r.height / 2,
+      duration: 0.45,
+      ease: 'power2.out'
+    });
+  }
+
+  function onGlassLeave() {
+    if (!glassRef || !glowRef) return;
+    gsap.to(glassRef, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+    gsap.to(glowRef, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
+  }
+
+  /** @type {(mode: 'default' | 'active') => void} */
+  function setCursorMode(mode) {
+    if (!cursorRef) return;
+    cursorRef.classList.toggle('is-active', mode === 'active');
+    gsap.to(cursorRef, {
+      scale: mode === 'active' ? 1.7 : 1,
+      duration: 0.25,
+      ease: 'power2.out'
+    });
+  }
+
+  onMount(() => {
+    gsap.set(cursorRef, { xPercent: -50, yPercent: -50, x: window.innerWidth / 2, y: window.innerHeight / 2, scale: 0 });
+
+    const hoverTargets = Array.from(document.querySelectorAll('a, button, .page-section, .page-glass'));
+    hoverTargets.forEach((target) => {
+      target.addEventListener('mouseenter', () => setCursorMode('active'));
+      target.addEventListener('mouseleave', () => setCursorMode('default'));
+    });
+  });
 </script>
 
-<div class="page-wrapper">
+<div class="page-wrapper" role="presentation" onmousemove={onPageMove} onmouseleave={onPageLeave}>
   <div class="blob-layer" aria-hidden="true">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
@@ -23,7 +93,8 @@
     <div class="blob w3"></div>
   </div>
 
-  <div class="page-glass">
+  <div class="page-glass" bind:this={glassRef} onmousemove={onGlassMove} onmouseleave={onGlassLeave}>
+    <div class="glass-glow" bind:this={glowRef} aria-hidden="true"></div>
     <div class="glass-inner">
       <section id="hero">
       <Landingpage />
@@ -59,6 +130,11 @@
       </section>
     </div>
   </div>
+
+  <div class="cursor-blob" bind:this={cursorRef} aria-hidden="true">
+    <span class="cursor-icon cursor-arrow">↗</span>
+    <span class="cursor-icon cursor-spark">✦</span>
+  </div>
 </div>
 
 <style>
@@ -69,6 +145,7 @@
       radial-gradient(140% 90% at 15% 0%, #fff8d6 0%, transparent 55%),
       radial-gradient(130% 90% at 90% 100%, #fff1bd 0%, transparent 50%),
       var(--wt);
+    cursor: none;
   }
 
   /* ─── BLOB LAYER (fixed behind the glass) ─── */
@@ -83,7 +160,7 @@
   .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(60px);
+    filter: blur(42px);
     will-change: transform;
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
@@ -227,18 +304,90 @@
     position: relative;
     z-index: 1;
     min-height: 100vh;
-    background: linear-gradient(rgba(250, 250, 248, 0.5), rgba(250, 250, 248, 0.34));
-    backdrop-filter: blur(16px) saturate(150%);
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    background: linear-gradient(rgba(250, 250, 248, 0.68), rgba(250, 250, 248, 0.52));
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
     border-top: 1px solid rgba(255, 204, 0, 0.14);
     border-bottom: 1px solid rgba(255, 204, 0, 0.14);
     box-shadow: inset 0 0 140px rgba(255, 204, 0, 0.05);
+    transform-style: preserve-3d;
+    perspective: 1200px;
+    will-change: transform;
+    overflow: hidden;
+  }
+
+  .glass-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 420px;
+    height: 420px;
+    margin: -210px 0 0 -210px;
+    background: radial-gradient(circle, rgba(255, 204, 0, 0.24), rgba(255, 204, 0, 0) 72%);
+    filter: blur(14px);
+    pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
   }
 
   .glass-inner {
+    position: relative;
+    z-index: 1;
     width: min(100%, 1100px);
     margin: 0 auto;
     padding: 6px 0 14px;
+  }
+
+  .cursor-blob {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 80;
+    background: radial-gradient(circle, rgba(255, 204, 0, 0.92), rgba(255, 204, 0, 0) 72%);
+    filter: blur(2px);
+    opacity: 0.9;
+    will-change: transform;
+  }
+
+  .cursor-icon {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--bk);
+    transition: opacity 0.2s ease;
+  }
+
+  .cursor-spark {
+    color: var(--bk);
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .cursor-blob.is-active .cursor-arrow {
+    opacity: 0;
+  }
+
+  .cursor-blob.is-active .cursor-spark {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (pointer: coarse) {
+    .page-wrapper {
+      cursor: auto;
+    }
+
+    .cursor-blob {
+      display: none;
+    }
   }
 
   @media (max-width: 720px) {
