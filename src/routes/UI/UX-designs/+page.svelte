@@ -3,18 +3,23 @@
   import { designs } from '$lib/data/designs';
 
   const carouselMap = {
-    1: ['/UI-designs/uipng-1.png', '/UI-designs/uipng-2.png', '/UI-designs/uipng-3.png'],
-    2: ['/UI-designs/uipng-2.png', '/UI-designs/uipng-3.png', '/UI-designs/uipng-4.png'],
-    3: ['/UI-designs/uipng-3.png', '/UI-designs/uipng-4.png', '/UI-designs/uipng-5.png'],
-    4: ['/UI-designs/uipng-4.png', '/UI-designs/uipng-5.png', '/UI-designs/uipng-6.png'],
-    5: ['/UI-designs/uipng-5.png', '/UI-designs/uipng-6.png', '/UI-designs/uipng-1.png'],
-    6: ['/UI-designs/uipng-6.png', '/UI-designs/uipng-1.png', '/UI-designs/uipng-2.png']
+    1: ['/UI-designs/uipng-1.webp', '/UI-designs/uipng-2.webp', '/UI-designs/uipng-3.webp'],
+    2: ['/UI-designs/uipng-2.webp', '/UI-designs/uipng-3.webp', '/UI-designs/uipng-4.webp'],
+    3: ['/UI-designs/uipng-3.webp', '/UI-designs/uipng-4.webp', '/UI-designs/uipng-5.webp'],
+    4: ['/UI-designs/uipng-4.webp', '/UI-designs/uipng-5.webp', '/UI-designs/uipng-6.webp'],
+    5: ['/UI-designs/uipng-5.webp', '/UI-designs/uipng-6.webp', '/UI-designs/uipng-1.webp'],
+    6: ['/UI-designs/uipng-6.webp', '/UI-designs/uipng-1.webp', '/UI-designs/uipng-2.webp']
   };
 
+  /** @type {Record<string, string[]>} */
+  const carouselBySlug = carouselMap;
+
+  /** @type {Record<string, number>} */
   let activeSlideById = Object.fromEntries(designs.map((d) => [d.slug, 0]));
 
+  /** @param {string} slug @param {number} direction */
   function moveSlide(slug, direction) {
-    const slides = carouselMap[slug] ?? [designs.find((d) => d.slug === slug)?.thumb ?? ''];
+    const slides = carouselBySlug[slug] ?? [designs.find((d) => d.slug === slug)?.thumb ?? ''];
     const nextIndex = activeSlideById[slug] ?? 0;
     const total = slides.length;
     activeSlideById[slug] = (nextIndex + direction + total) % total;
@@ -23,7 +28,7 @@
   onMount(() => {
     const interval = setInterval(() => {
       designs.forEach((d) => {
-        const slides = carouselMap[d.slug] ?? [d.thumb];
+        const slides = carouselBySlug[d.slug] ?? [d.thumb];
         const current = activeSlideById[d.slug] ?? 0;
         activeSlideById[d.slug] = (current + 1) % slides.length;
       });
@@ -42,25 +47,27 @@
       {#each designs as d}
         <li>
           <article class="design-card">
-            <div class="card-thumb">
-              <div class="carousel-frame">
-                <div class="carousel-track" style={`transform: translateX(-${(activeSlideById[d.slug] ?? 0) * 100}%);`}>
-                  {#each carouselMap[d.slug] ?? [d.thumb] as slide}
-                    <div class="carousel-slide">
-                      <img src={slide} alt={d.title} loading="lazy" decoding="async" />
-                    </div>
-                  {/each}
+            <a href={`/UI/UX-designs/${d.slug}`} class="card-thumb-link" aria-label={`View ${d.title}`}>
+              <div class="card-thumb">
+                <div class="carousel-frame">
+                  <div class="carousel-track" style={`transform: translateX(-${(activeSlideById[d.slug] ?? 0) * 100}%);`}>
+                    {#each carouselBySlug[d.slug] ?? [d.thumb] as slide}
+                      <div class="carousel-slide">
+                        <img src={slide} alt={d.title} loading="lazy" decoding="async" />
+                      </div>
+                    {/each}
+                  </div>
+                </div>
+
+                <div class="carousel-controls">
+                  <button type="button" class="carousel-btn" aria-label="Previous image" on:click={() => moveSlide(d.slug, -1)}>‹</button>
+                  <button type="button" class="carousel-btn" aria-label="Next image" on:click={() => moveSlide(d.slug, 1)}>›</button>
                 </div>
               </div>
-
-              <div class="carousel-controls">
-                <button type="button" class="carousel-btn" aria-label="Previous image" on:click={() => moveSlide(d.slug, -1)}>‹</button>
-                <button type="button" class="carousel-btn" aria-label="Next image" on:click={() => moveSlide(d.slug, 1)}>›</button>
-              </div>
-            </div>
+            </a>
 
             <div class="card-body">
-              <h3>{d.title}</h3>
+              <h3><a href={`/UI/UX-designs/${d.slug}`}>{d.title}</a></h3>
               <p>{d.desc}</p>
               <div class="card-foot">
                 <span class="date">{d.date}</span>
@@ -107,6 +114,11 @@
     background: linear-gradient(135deg, #f4f3ec 0%, #e6e3d6 100%);
     overflow: hidden;
     position: relative;
+  }
+
+  .card-thumb-link {
+    display: block;
+    color: inherit;
   }
 
   .carousel-frame {
@@ -165,6 +177,10 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 8px;
+  }
+
+  .card-body h3 a {
+    color: var(--bk);
   }
 
   .card-body p {

@@ -6,23 +6,26 @@
 
 <script>
   const orgs = [
-    { src: '/logo (1).png', name: 'Makoka Research Station' },
-    { src: '/logo (2).png', name: 'Development Fund Of Norway' },
-    { src: '/logo (3).png', name: 'LUANAR' },
-    { src: '/logo (4).png', name: 'Agrilab MW' },
+    { src: '/logo (1).webp', name: 'Makoka Research Station' },
+    { src: '/logo (2).webp', name: 'Development Fund Of Norway' },
+    { src: '/logo (3).webp', name: 'LUANAR' },
+    { src: '/logo (4).webp', name: 'Agrilab MW' },
     { src: '/logo (5).png', name: 'FES' },
-    { src: '/logo (6).png', name: 'Find Your Feet' },
-    { src: '/logo (7).png', name: 'Claradens' },
-    { src: '/logo (8).png', name: 'Korevia' },
-    { src: '/logo (9).png', name: 'Youth Arise Network' },
+    { src: '/logo (6).webp', name: 'Find Your Feet' },
+    { src: '/logo (7).webp', name: 'Claradens' },
+    { src: '/logo (8).webp', name: 'Korevia' },
+    { src: '/logo (9).webp', name: 'Youth Arise Network' },
     { src: '/logo (10).png', name: 'Rotaract' },
-    { src: '/logo (11).png', name: 'Courgagoues Kids Foundtation' },
-    { src: '/logo (12).png', name: 'NCRS' },
+    { src: '/logo (11).webp', name: 'Courgagoues Kids Foundtation' },
+    { src: '/logo (12).webp', name: 'NCRS' },
   ];
 
+  /** @param {Event} event */
   function handleImageError(event) {
-    event.target.style.display = 'none';
-    event.target.nextElementSibling.style.display = 'flex';
+    const img = /** @type {HTMLImageElement} */ (event.currentTarget);
+    img.style.display = 'none';
+    const fallback = img.nextElementSibling;
+    if (fallback && fallback instanceof HTMLElement) fallback.style.display = 'flex';
   }
 </script>
 
@@ -40,7 +43,7 @@
           alt={org.name}
           loading="lazy"
           decoding="async"
-          on:error={handleImageError}
+          onerror={handleImageError}
         />
         <span class="fallback">{org.name}</span>
         <span class="org-tooltip">{org.name}</span>

@@ -17,7 +17,6 @@
   export let aboutHref   = '/';
   export let githubHref  = '';
   export let projectHref = '';
-  export let logoSrc     = '';
 </script>
 
 <article class="card">
@@ -101,9 +100,6 @@
 
   /* ─── DESKTOP: allow 2-col on wider screens ─── */
   @media (min-width: 720px) {
-    .projects-grid {
-      gap: 22px;
-    }
     .card {
       max-width: 360px;
     }
@@ -171,12 +167,6 @@
     color: var(--gray);
   }
 
-  .card-logo {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-  }
-
   .card-actions {
     display: flex;
     flex-wrap: wrap;
@@ -234,6 +224,12 @@
       background: var(--yl);
       color: var(--bk);
       border-color: var(--yl);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .action-link {
+      animation: none;
     }
   }
 </style>

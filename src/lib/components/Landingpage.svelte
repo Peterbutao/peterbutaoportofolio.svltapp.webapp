@@ -9,6 +9,13 @@
   let role4: HTMLElement;
   let role5: HTMLElement;
 
+  function handleImageError(event: Event) {
+    const img = event.currentTarget as HTMLImageElement;
+    img.style.display = 'none';
+    const fallback = img.nextElementSibling;
+    if (fallback instanceof HTMLElement) fallback.style.display = 'flex';
+  }
+
   onMount(async () => {
     const gsap = (await import('gsap')).default;
     setTimeout(() => {
@@ -80,7 +87,7 @@
     <div class="profile-wrap">
       <div class="profile-ring" bind:this={profileRing}>
         <!-- Place your photo at /static/profile.png -->
-        <img src="/profile.png" alt="Peter Rodrigues Butao" fetchpriority="high" decoding="async" />
+        <img src="/profile.webp" alt="Peter Rodrigues Butao" fetchpriority="high" decoding="async" onerror={handleImageError} />
         <div class="avatar-fallback">PRB</div>
       </div>
     </div>

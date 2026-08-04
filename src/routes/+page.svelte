@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import gsap from 'gsap';
   import Landingpage from '$lib/components/Landingpage.svelte';
   import Organisations from '$lib/components/Organisations.svelte';
   import UIDesigns from '$lib/components/UIDesigns.svelte';
@@ -12,27 +11,29 @@
   import Contacts from '$lib/components/Contacts.svelte';
 
   /** @type {HTMLDivElement | null} */
-  /** @type {HTMLDivElement | null} */
   let cursorRef;
   /** @type {HTMLDivElement | null} */
   let glassRef;
   /** @type {HTMLDivElement | null} */
   let glowRef;
 
+  /** @type {import('gsap').gsap | null} */
+  let gsap;
+
   /** @type {(e: MouseEvent) => void} */
   function onPageMove(e) {
-    if (!cursorRef) return;
+    if (!gsap || !cursorRef) return;
     gsap.to(cursorRef, { x: e.clientX, y: e.clientY, scale: 1, duration: 0.35, ease: 'power3.out' });
   }
 
   function onPageLeave() {
-    if (!cursorRef) return;
+    if (!gsap || !cursorRef) return;
     gsap.to(cursorRef, { scale: 0, duration: 0.25, ease: 'power2.out' });
   }
 
   /** @type {(e: MouseEvent) => void} */
   function onGlassMove(e) {
-    if (!glassRef || !glowRef) return;
+    if (!gsap || !glassRef || !glowRef) return;
     const r = glassRef.getBoundingClientRect();
     const x = e.clientX - r.left;
     const y = e.clientY - r.top;
@@ -53,14 +54,14 @@
   }
 
   function onGlassLeave() {
-    if (!glassRef || !glowRef) return;
+    if (!gsap || !glassRef || !glowRef) return;
     gsap.to(glassRef, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
     gsap.to(glowRef, { x: 0, y: 0, duration: 0.6, ease: 'power2.out' });
   }
 
   /** @type {(mode: 'default' | 'active') => void} */
   function setCursorMode(mode) {
-    if (!cursorRef) return;
+    if (!gsap || !cursorRef) return;
     cursorRef.classList.toggle('is-active', mode === 'active');
     gsap.to(cursorRef, {
       scale: mode === 'active' ? 1.7 : 1,
@@ -69,7 +70,9 @@
     });
   }
 
-  onMount(() => {
+  onMount(async () => {
+    const mod = await import('gsap');
+    gsap = mod.default;
     gsap.set(cursorRef, { xPercent: -50, yPercent: -50, x: window.innerWidth / 2, y: window.innerHeight / 2, scale: 0 });
 
     const hoverTargets = Array.from(document.querySelectorAll('a, button, .page-section, .page-glass'));
@@ -93,7 +96,7 @@
     <div class="blob w3"></div>
   </div>
 
-  <div class="page-glass" bind:this={glassRef} onmousemove={onGlassMove} onmouseleave={onGlassLeave}>
+  <div class="page-glass" role="presentation" bind:this={glassRef} onmousemove={onGlassMove} onmouseleave={onGlassLeave}>
     <div class="glass-glow" bind:this={glowRef} aria-hidden="true"></div>
     <div class="glass-inner">
       <section id="hero">
@@ -305,14 +308,15 @@
     z-index: 1;
     min-height: 100vh;
     background: linear-gradient(rgba(250, 250, 248, 0.68), rgba(250, 250, 248, 0.52));
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border-top: 1px solid rgba(255, 204, 0, 0.14);
     border-bottom: 1px solid rgba(255, 204, 0, 0.14);
     box-shadow: inset 0 0 140px rgba(255, 204, 0, 0.05);
     transform-style: preserve-3d;
     perspective: 1200px;
     will-change: transform;
+    contain: paint;
     overflow: hidden;
   }
 
@@ -371,11 +375,11 @@
     transform: scale(0.9);
   }
 
-  .cursor-blob.is-active .cursor-arrow {
+  :global(.cursor-blob.is-active .cursor-arrow) {
     opacity: 0;
   }
 
-  .cursor-blob.is-active .cursor-spark {
+  :global(.cursor-blob.is-active .cursor-spark) {
     opacity: 1;
     transform: scale(1);
   }

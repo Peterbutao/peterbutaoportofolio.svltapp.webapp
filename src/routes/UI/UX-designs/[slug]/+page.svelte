@@ -16,6 +16,10 @@
   <div class="design-details">
     <p>{design.details}</p>
   </div>
+
+  <div class="design-actions">
+    <a href={design.src} target="_blank" rel="noopener" class="action-link">VIEW DESIGN</a>
+  </div>
 </article>
 
 <style>
@@ -68,6 +72,35 @@
     font-size: 0.95rem;
     line-height: 1.9;
     color: var(--gray);
+  }
+
+  .design-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 42px;
+  }
+
+  .action-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    background: transparent;
+    color: var(--bk);
+    border: 1.5px solid var(--bk);
+    border-radius: 999px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    transition: background 0.2s, color 0.2s, transform 0.2s ease;
+  }
+
+  .action-link:hover {
+    background: var(--bk);
+    color: var(--wt);
+    transform: translateY(-1px);
   }
 
   @media (min-width: 800px) {

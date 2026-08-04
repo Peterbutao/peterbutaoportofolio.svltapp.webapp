@@ -1,3 +1,13 @@
+<script>
+  /** @param {Event} event */
+  function handleImageError(event) {
+    const img = /** @type {HTMLImageElement} */ (event.currentTarget);
+    img.style.display = 'none';
+    const fallback = img.nextElementSibling;
+    if (fallback && fallback instanceof HTMLElement) fallback.style.display = 'flex';
+  }
+</script>
+
 <div class="section-label">Impact</div>
 <h2 class="section-title">Community Leadership<br>& Volunteer Work</h2>
 <div class="section-divider"></div>
@@ -6,7 +16,7 @@
   <div class="community-card">
     <div class="community-img">
       <!-- Place community/volunteer image at /static/community.jpg -->
-      <img src="/community/community.jpg" alt="Community Leadership" loading="lazy" decoding="async" />
+      <img src="/community/community.webp" alt="Community Leadership" loading="lazy" decoding="async" onerror={handleImageError} />
       <div class="img-fallback">Community</div>
     </div>
     <h3>Community Leadership</h3>
@@ -76,27 +86,6 @@
     color: var(--gray);
     line-height: 1.7;
     margin-bottom: 18px;
-  }
-
-  .community-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 9px;
-    margin-bottom: 20px;
-  }
-
-  .community-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.82rem;
-    color: var(--bk);
-  }
-
-  .check {
-    color: var(--yl);
-    font-weight: 700;
-    font-size: 0.9rem;
   }
 
   .community-btn {

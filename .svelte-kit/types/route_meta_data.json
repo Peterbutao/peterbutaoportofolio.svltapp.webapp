@@ -1,13 +1,20 @@
 {
-	"/": [],
-	"/UI-ux-designs": [],
-	"/UI-ux-designs/[slug]": [],
-	"/UI/UX-designs": [],
-	"/UI/UX-designs/[slug]": [
-		"src/routes/UI/UX-designs/[slug]/+page.js"
+	"/": [
+		"src/routes/+layout.js",
+		"src/routes/+layout.js"
 	],
-	"/projects": [],
+	"/UI/UX-designs": [
+		"src/routes/+layout.js"
+	],
+	"/UI/UX-designs/[slug]": [
+		"src/routes/UI/UX-designs/[slug]/+page.js",
+		"src/routes/+layout.js"
+	],
+	"/projects": [
+		"src/routes/+layout.js"
+	],
 	"/projects/[slug]": [
-		"src/routes/projects/[slug]/+page.js"
+		"src/routes/projects/[slug]/+page.js",
+		"src/routes/+layout.js"
 	]
 }

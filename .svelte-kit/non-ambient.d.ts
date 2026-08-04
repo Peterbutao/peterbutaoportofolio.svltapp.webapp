@@ -29,24 +29,21 @@ declare module "$app/types" {
 	type MatcherParam<M> = M extends (param : string) => param is (infer U extends string) ? U : string;
 
 	export interface AppTypes {
-		RouteId(): "/" | "/UI-ux-designs" | "/UI-ux-designs/[slug]" | "/UI" | "/UI/UX-designs" | "/UI/UX-designs/[slug]" | "/projects" | "/projects/[slug]";
+		RouteId(): "/" | "/UI" | "/UI/UX-designs" | "/UI/UX-designs/[slug]" | "/projects" | "/projects/[slug]";
 		RouteParams(): {
-			"/UI-ux-designs/[slug]": { slug: string };
 			"/UI/UX-designs/[slug]": { slug: string };
 			"/projects/[slug]": { slug: string }
 		};
 		LayoutParams(): {
 			"/": { slug?: string };
-			"/UI-ux-designs": { slug?: string };
-			"/UI-ux-designs/[slug]": { slug: string };
 			"/UI": { slug?: string };
 			"/UI/UX-designs": { slug?: string };
 			"/UI/UX-designs/[slug]": { slug: string };
 			"/projects": { slug?: string };
 			"/projects/[slug]": { slug: string }
 		};
-		Pathname(): "/" | "/UI-ux-designs" | `/UI-ux-designs/${string}` & {} | "/UI/UX-designs" | `/UI/UX-designs/${string}` & {} | "/projects" | `/projects/${string}` & {};
+		Pathname(): "/" | "/UI/UX-designs" | `/UI/UX-designs/${string}` & {} | "/projects" | `/projects/${string}` & {};
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
-		Asset(): "/community/community.jpg" | "/dev.svg" | "/favicon.png" | "/Frame 13.png" | "/global.scss" | "/logo (1).png" | "/logo (10).png" | "/logo (11).png" | "/logo (12).jpg" | "/logo (12).png" | "/logo (2).png" | "/logo (3).png" | "/logo (4).png" | "/logo (5).png" | "/logo (6).png" | "/logo (7).png" | "/logo (8).jpg" | "/logo (8).png" | "/logo (9).png" | "/logo.png" | "/profile.png" | "/Projects/pro.png" | "/Projects/pro1.png" | "/Projects/pro2.png" | "/Projects/pro3.png" | "/Projects/pro4.png" | "/Projects/pro5.png" | "/Projects/pro6.png" | "/Projects/pro7.png" | "/Projects/pro8.png" | "/Projects/pro9.png" | "/robots.txt" | "/sitemap.xml" | "/UI-designs/ANNUAL-REPORT.pdf" | "/UI-designs/uidesign-4.pdf" | "/UI-designs/uidesigns-1.pdf" | "/UI-designs/uidesigns-2.pdf" | "/UI-designs/uidesigns-3.pdf" | "/UI-designs/uipng-1.png" | "/UI-designs/uipng-2.png" | "/UI-designs/uipng-3.png" | "/UI-designs/uipng-4.png" | "/UI-designs/uipng-5.png" | "/UI-designs/uipng-6.png" | "/work/work1.jpg" | string & {};
+		Asset(): "/community/community.webp" | "/favicon.png" | "/logo (1).webp" | "/logo (10).png" | "/logo (11).webp" | "/logo (12).webp" | "/logo (2).webp" | "/logo (3).webp" | "/logo (4).webp" | "/logo (5).png" | "/logo (6).webp" | "/logo (7).webp" | "/logo (8).webp" | "/logo (9).webp" | "/logo.png" | "/profile.png" | "/profile.webp" | "/Projects/pro.webp" | "/Projects/pro1.webp" | "/Projects/pro2.webp" | "/Projects/pro3.webp" | "/Projects/pro4.webp" | "/Projects/pro5.webp" | "/Projects/pro6.webp" | "/Projects/pro7.webp" | "/Projects/pro8.webp" | "/Projects/pro9.webp" | "/qr.png" | "/robots.txt" | "/sitemap.xml" | "/UI-designs/ANNUAL-REPORT.pdf" | "/UI-designs/uidesign-4.pdf" | "/UI-designs/uidesigns-1.pdf" | "/UI-designs/uidesigns-2.pdf" | "/UI-designs/uidesigns-3.pdf" | "/UI-designs/uipng-1.webp" | "/UI-designs/uipng-2.webp" | "/UI-designs/uipng-3.webp" | "/UI-designs/uipng-4.webp" | "/UI-designs/uipng-5.webp" | "/UI-designs/uipng-6.webp" | "/work/work1.webp" | "/work/work2.webp" | string & {};
 	}
 }

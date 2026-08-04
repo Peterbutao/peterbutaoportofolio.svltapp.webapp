@@ -6,6 +6,14 @@
     { label: 'LinkedIn',  href: 'https://linkedin.com/in/peterethanbutao',abbr: 'LI' },
     { label: 'GitHub',    href: 'https://github.com',                     abbr: 'GH' },
   ];
+
+  /** @param {Event} event */
+  function handleImageError(event) {
+    const img = /** @type {HTMLImageElement} */ (event.currentTarget);
+    img.style.display = 'none';
+    const fallback = img.nextElementSibling;
+    if (fallback && fallback instanceof HTMLElement) fallback.style.display = 'flex';
+  }
 </script>
 
 <div class="section-label">Get in Touch</div>
@@ -63,13 +71,10 @@
         </div>
         <!-- QR placeholder — replace src with your real QR code in /static/qr.png -->
         <div class="biz-qr">
-          <img src="/qr.png" alt="QR Code" loading="lazy" decoding="async" />
+          <img src="/qr.png" alt="QR Code" loading="lazy" decoding="async" onerror={handleImageError} />
           <div class="qr-fallback">QR</div>
         </div>
       </div>
-      <a href="/business-card.pdf" download class="dl-btn">
-        ↓ DOWNLOAD BUSINESS CARD
-      </a>
     </div>
   </div>
 
@@ -273,20 +278,4 @@
     color: var(--gray);
     letter-spacing: 0.1em;
   }
-
-  .dl-btn {
-    display: block;
-    margin-top: 16px;
-    background: var(--yl);
-    color: var(--bk);
-    border-radius: 8px;
-    padding: 14px;
-    text-align: center;
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    transition: opacity 0.2s;
-  }
-
-  .dl-btn:hover { opacity: 0.82; }
 </style>

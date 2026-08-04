@@ -18,13 +18,12 @@
         aboutHref={`/projects/${p.slug}`}
         githubHref={p.github}
         projectHref={p.src}
-        logoSrc={p.logoSrc}
       />
     </li>
   {/each}
 </ul>
 
-<a href="/" class="view-all">VIEW ALL CODING PROJECTS</a>
+<a href="/projects" class="view-all">VIEW ALL CODING PROJECTS</a>
 
 <style>
   .projects-grid {

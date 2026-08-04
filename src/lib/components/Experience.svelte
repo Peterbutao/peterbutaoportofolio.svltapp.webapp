@@ -1,5 +1,13 @@
 <script>
   import { experiences } from '$lib/data/experiences';
+
+  /** @param {Event} event */
+  function handleImageError(event) {
+    const img = /** @type {HTMLImageElement} */ (event.currentTarget);
+    img.style.display = 'none';
+    const fallback = img.nextElementSibling;
+    if (fallback && fallback instanceof HTMLElement) fallback.style.display = 'flex';
+  }
 </script>
 
 <div class="section-label">Career</div>
@@ -15,6 +23,7 @@
           alt={exp.org}
           loading="lazy"
           decoding="async"
+          onerror={handleImageError}
         />
         <div class="img-fallback">{exp.org}</div>
       </div>

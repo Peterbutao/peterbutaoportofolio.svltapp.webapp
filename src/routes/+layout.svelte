@@ -2,17 +2,18 @@
   import '../app.css';
   import { onMount } from 'svelte';
 
+  let { children } = $props();
+
   let menuOpen = $state(false);
   let scrolled = $state(false);
 
   const navLinks = [
-    { label: 'About',       href: '#hero' },
-    // { label: 'Organisations', href: '#organisations' },
-    { label: 'UI Designs',  href: 'ui-ux-designs' },
-    { label: 'Projects',    href: '#projects' },
-    { label: 'Experience',  href: '#experience' },
-    { label: 'Services',    href: '#services' },
-    { label: 'Contact',     href: '#contact' },
+    { label: 'About',       href: '/about' },
+    { label: 'UI Designs',  href: '/UI/UX-designs' },
+    { label: 'Projects',    href: '/projects' },
+    { label: 'Experience',  href: '/experience' },
+    { label: 'Services',    href: '/services' },
+    { label: 'Contact',     href: '/contact' },
   ];
 
   function toggleMenu() { menuOpen = !menuOpen; }
@@ -65,7 +66,7 @@
   </nav>
 
   <main>
-    <slot />
+    {@render children()}
   </main>
 
   <footer class="site-footer">
@@ -116,8 +117,6 @@
     letter-spacing: 0.1em;
     color: var(--bk);
   }
-
-  .nav-spacer { width: 12px; }
 
   .nav-links {
     display: none;
@@ -243,10 +242,6 @@
       flex: 0;
       text-align: left;
       margin-right: 0;
-    }
-
-    .nav-spacer {
-      width: 0;
     }
   }
 

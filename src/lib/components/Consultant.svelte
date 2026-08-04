@@ -6,12 +6,9 @@
   <div class="consultant-card">
     <div class="logo-marquee" aria-hidden="true">
       <div class="logo-track">
-        <div class="logo-pill"><img src="/logo.png" alt="logo" loading="lazy" decoding="async" /></div>
-        <div class="logo-pill"><img src="/logo (1).png" alt="logo" loading="lazy" decoding="async" /></div>
-        <div class="logo-pill"><img src="/logo (2).png" alt="logo" loading="lazy" decoding="async" /></div>
-        <div class="logo-pill"><img src="/logo.png" alt="logo" loading="lazy" decoding="async" /></div>
-        <div class="logo-pill"><img src="/logo (1).png" alt="logo" loading="lazy" decoding="async" /></div>
-        <div class="logo-pill"><img src="/logo (2).png" alt="logo" loading="lazy" decoding="async" /></div>
+        <div class="logo-pill"><img src="/logo (9).webp" alt="logo" loading="lazy" decoding="async" /></div>
+        <div class="logo-pill"><img src="/logo (11).webp" alt="logo" loading="lazy" decoding="async" /></div>
+        <div class="logo-pill"><img src="/logo (12).webp" alt="logo" loading="lazy" decoding="async" /></div>
       </div>
     </div>
     <h3>Monitoring & Evaluation</h3>
@@ -73,15 +70,18 @@
     overflow: hidden;
     margin-bottom: 16px;
     width: 100%;
-    max-width: 240px;
+    max-width: 100%;
   }
 
   .logo-track {
     display: flex;
     align-items: center;
-    gap: 10px;
-    width: max-content;
-    animation: logoWalk 8s linear infinite;
+    justify-content: space-evenly;
+    gap: 0;
+    width: 100%;
+    min-width: 100%;
+    animation: logoWalk 18s linear infinite;
+    will-change: transform;
   }
 
   .logo-pill {
@@ -132,7 +132,7 @@
       transform: translateX(0);
     }
     to {
-      transform: translateX(calc(-50% - 5px));
+      transform: translateX(-50%);
     }
   }
 

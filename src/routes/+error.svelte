@@ -1,11 +1,14 @@
 <script>
   import { onMount } from 'svelte';
   import { page } from '$app/state';
-  import gsap from 'gsap';
+
+  /** @type {import('gsap').gsap | null} */
+  let gsap;
 
   let status = $derived(page.status);
   let message = $derived(page.error?.message ?? 'Something went wrong.');
 
+  /** @type {Record<number, { label: string; sub: string }>} */
   const copy = {
     404: {
       label: 'LOST IN THE BLUR',
@@ -47,22 +50,33 @@
   ];
   let tease = $state(teases[0]);
 
+  /** @type {HTMLDivElement | null} */
   let cardRef;
+  /** @type {HTMLDivElement | null} */
   let codeWrap;
+  /** @type {HTMLDivElement | null} */
   let codeRef;
+  /** @type {HTMLDivElement | null} */
   let glowRef;
+  /** @type {HTMLAnchorElement | null} */
   let btnRef;
+  /** @type {HTMLDivElement | null} */
   let cursorRef;
 
+  /** @param {MouseEvent} e */
   function onPageMove(e) {
+    if (!gsap || !cursorRef) return;
     gsap.to(cursorRef, { x: e.clientX, y: e.clientY, scale: 1, duration: 0.45, ease: 'power3.out' });
   }
 
   function onPageLeave() {
+    if (!gsap || !cursorRef) return;
     gsap.to(cursorRef, { scale: 0, duration: 0.4, ease: 'power2.out' });
   }
 
+  /** @param {MouseEvent} e */
   function onMove(e) {
+    if (!gsap || !cardRef || !glowRef || !cursorRef) return;
     const r = cardRef.getBoundingClientRect();
     const x = e.clientX - r.left;
     const y = e.clientY - r.top;
@@ -78,12 +92,15 @@
   }
 
   function onLeave() {
+    if (!gsap || !cardRef || !glowRef || !cursorRef) return;
     gsap.to(cardRef, { rotateX: 0, rotateY: 0, duration: 0.9, ease: 'elastic.out(1,0.5)' });
     gsap.to(glowRef, { x: 0, y: 0, duration: 0.8, ease: 'power3.out' });
     gsap.to(cursorRef, { scale: 1, duration: 0.3, ease: 'power2.out' });
   }
 
+  /** @param {MouseEvent} e */
   function magnet(e) {
+    if (!gsap || !btnRef) return;
     const r = btnRef.getBoundingClientRect();
     gsap.to(btnRef, {
       x: (e.clientX - r.left - r.width / 2) * 0.35,
@@ -94,28 +111,34 @@
   }
 
   function unMagnet() {
+    if (!gsap || !btnRef) return;
     gsap.to(btnRef, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1,0.4)' });
   }
 
   function shake() {
-    gsap.fromTo(
+    if (!gsap || !codeRef) return;
+    const tween = gsap;
+    tween.fromTo(
       codeRef,
       { x: 0, y: 0, rotate: 0, scale: 1 },
       {
-        x: () => gsap.utils.random(-14, 14),
-        y: () => gsap.utils.random(-10, 10),
-        rotate: () => gsap.utils.random(-5, 5),
+        x: () => tween.utils.random(-14, 14),
+        y: () => tween.utils.random(-10, 10),
+        rotate: () => tween.utils.random(-5, 5),
         duration: 0.05,
         repeat: 7,
         yoyo: true,
         ease: 'none',
-        onComplete: () => gsap.set(codeRef, { x: 0, y: 0, rotate: 0 })
+        onComplete: () => tween.set(codeRef, { x: 0, y: 0, rotate: 0 })
       }
     );
     tease = teases[Math.floor(Math.random() * teases.length)];
   }
 
-  onMount(() => {
+  onMount(async () => {
+    const mod = await import('gsap');
+    gsap = mod.default;
+    if (!cursorRef || !codeWrap || !cardRef) return;
     gsap.set(cursorRef, { xPercent: -50, yPercent: -50, x: window.innerWidth / 2, y: window.innerHeight / 2 });
 
     const tl = gsap.timeline();
@@ -192,6 +215,7 @@
     justify-content: center;
     padding: 48px 24px;
     overflow: hidden;
+    cursor: none;
     background:
       radial-gradient(120% 90% at 12% 0%, #fff8d6 0%, transparent 55%),
       radial-gradient(120% 90% at 90% 100%, #fff1bd 0%, transparent 50%),
@@ -353,8 +377,8 @@
     width: 100%;
     max-width: 560px;
     background: linear-gradient(rgba(250, 250, 248, 0.55), rgba(250, 250, 248, 0.35));
-    backdrop-filter: blur(16px) saturate(150%);
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
     border: 1px solid rgba(255, 204, 0, 0.18);
     border-radius: 18px;
     box-shadow: inset 0 0 120px rgba(255, 204, 0, 0.06), 0 24px 60px rgba(0, 0, 0, 0.08);
@@ -498,6 +522,16 @@
     .b4 { width: 140px; height: 140px; }
     .b5 { width: 180px; height: 180px; }
     .glass { padding: 32px 20px 30px; }
+  }
+
+  @media (pointer: coarse) {
+    .page {
+      cursor: auto;
+    }
+
+    .cursor-blob {
+      display: none;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
