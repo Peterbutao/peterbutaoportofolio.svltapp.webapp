@@ -85,8 +85,8 @@
   }
 
   .logo-pill {
-    width: 64px;
-    height: 64px;
+    width: 46px;
+    height: 46px;
     border-radius: 5px;
     border: 1px solid rgba(0,0,0,0.08);
     display: flex;
@@ -94,14 +94,37 @@
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
+    transform-origin: center;
+    animation: logoPulse 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
     /* background: linear-gradient(135deg, rgba(255,204,0,0.15), rgba(255,204,0,0.4)); */
   }
 
+  .logo-track .logo-pill:nth-child(1),
+  .logo-track .logo-pill:nth-child(4) {
+    animation-delay: -1s;
+  }
+
+  .logo-track .logo-pill:nth-child(2),
+  .logo-track .logo-pill:nth-child(5) {
+    animation-delay: -3s;
+  }
+
+  .logo-track .logo-pill:nth-child(3),
+  .logo-track .logo-pill:nth-child(6) {
+    animation-delay: -5s;
+  }
+
   .logo-pill img {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     transform: translateX(-4px);
+    animation: iconPulse 8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  .logo-track .logo-pill:nth-child(1) img,
+  .logo-track .logo-pill:nth-child(4) img {
+    animation-delay: -1s;
   }
 
   @keyframes logoWalk {
@@ -110,6 +133,33 @@
     }
     to {
       transform: translateX(calc(-50% - 5px));
+    }
+  }
+
+  @keyframes logoPulse {
+    0%, 100% {
+      transform: scale(0.92);
+      opacity: 0.9;
+    }
+    20%, 38% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    58%, 78% {
+      transform: scale(0.84);
+      opacity: 0.82;
+    }
+  }
+
+  @keyframes iconPulse {
+    0%, 100% {
+      transform: translateX(-4px) scale(1);
+    }
+    20%, 38% {
+      transform: translateX(-4px) scale(1.08);
+    }
+    58%, 78% {
+      transform: translateX(-4px) scale(0.9);
     }
   }
 

@@ -8,7 +8,7 @@
   const navLinks = [
     { label: 'About',       href: '#hero' },
     { label: 'Organisations', href: '#organisations' },
-    { label: 'UI Designs',  href: '#ui-designs' },
+    { label: 'UI Designs',  href: 'ui-ux-designs' },
     { label: 'Projects',    href: '#projects' },
     { label: 'Experience',  href: '#experience' },
     { label: 'Services',    href: '#services' },

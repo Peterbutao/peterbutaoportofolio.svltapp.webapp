@@ -38,7 +38,13 @@
     flex-wrap: wrap;
     gap: 18px;
     justify-content: center;
-    margin-bottom: 22px;
+    margin: 0 0 22px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .designs-grid li {
+    width: 100%;
   }
 
   .design-card {
@@ -52,6 +58,29 @@
     max-width: 340px;
     transition: transform 0.22s ease, box-shadow 0.22s ease;
     color: var(--bk);
+  }
+
+  @media (max-width: 719px) {
+    .designs-grid {
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .designs-grid li {
+      width: 100%;
+    }
+
+    .design-card {
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 720px) {
+    .designs-grid li {
+      width: auto;
+      max-width: 360px;
+      flex: 1 1 340px;
+    }
   }
 
   .design-card:hover {
