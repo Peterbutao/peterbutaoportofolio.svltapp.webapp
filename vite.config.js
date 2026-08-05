@@ -9,8 +9,10 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'gsap': ['gsap']
+        manualChunks: (id) => {
+          if (id.includes('node_modules/gsap')) {
+            return 'gsap';
+          }
         }
       }
     }
