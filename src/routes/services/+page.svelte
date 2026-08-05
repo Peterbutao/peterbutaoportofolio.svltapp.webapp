@@ -1,7 +1,9 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { services } from '$lib/data/services';
   import '$lib/page-styles.css';
+
+  let codeWrap: HTMLElement | null = null;
 
   const teases = [
     'Built to move ideas from brief to launch.',

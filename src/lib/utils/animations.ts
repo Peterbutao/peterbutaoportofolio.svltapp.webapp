@@ -18,12 +18,13 @@ export interface AnimationConfig {
   duration?: number;
   ease?: string;
   delay?: number;
+  stagger?: number;
 }
 
 /**
  * Initialize cursor animation
  */
-export function initCursorAnimation(gsap: GSAPType, cursorRef: HTMLDivElement | null) {
+export function initCursorAnimation(gsap: typeof GSAPType, cursorRef: HTMLDivElement | null) {
   if (!cursorRef) return;
   gsap.set(cursorRef, { 
     xPercent: -50, 
@@ -37,7 +38,7 @@ export function initCursorAnimation(gsap: GSAPType, cursorRef: HTMLDivElement | 
 /**
  * Handle cursor movement on page
  */
-export function onPageMove(gsap: GSAPType, cursorRef: HTMLDivElement | null, e: MouseEvent) {
+export function onPageMove(gsap: typeof GSAPType, cursorRef: HTMLDivElement | null, e: MouseEvent) {
   if (!gsap || !cursorRef) return;
   gsap.to(cursorRef, { 
     x: e.clientX, 
@@ -51,7 +52,7 @@ export function onPageMove(gsap: GSAPType, cursorRef: HTMLDivElement | null, e: 
 /**
  * Handle cursor leaving page
  */
-export function onPageLeave(gsap: GSAPType, cursorRef: HTMLDivElement | null) {
+export function onPageLeave(gsap: typeof GSAPType, cursorRef: HTMLDivElement | null) {
   if (!gsap || !cursorRef) return;
   gsap.to(cursorRef, { 
     scale: 0, 
@@ -64,7 +65,7 @@ export function onPageLeave(gsap: GSAPType, cursorRef: HTMLDivElement | null) {
  * Handle glass card tilt effect
  */
 export function onGlassMove(
-  gsap: GSAPType, 
+  gsap: typeof GSAPType, 
   glassRef: HTMLDivElement | null, 
   glowRef: HTMLDivElement | null, 
   cursorRef: HTMLDivElement | null,
@@ -101,7 +102,7 @@ export function onGlassMove(
  * Reset glass card tilt effect
  */
 export function onGlassLeave(
-  gsap: GSAPType,
+  gsap: typeof GSAPType,
   glassRef: HTMLDivElement | null,
   glowRef: HTMLDivElement | null,
   cursorRef: HTMLDivElement | null
@@ -129,7 +130,7 @@ export function onGlassLeave(
  * Set cursor mode (active/default)
  */
 export function setCursorMode(
-  gsap: GSAPType,
+  gsap: typeof GSAPType,
   cursorRef: HTMLDivElement | null,
   mode: 'default' | 'active'
 ) {
@@ -145,7 +146,7 @@ export function setCursorMode(
 /**
  * Magnetic button effect
  */
-export function magnet(gsap: GSAPType, btn: HTMLAnchorElement, e: MouseEvent) {
+export function magnet(gsap: typeof GSAPType, btn: HTMLAnchorElement, e: MouseEvent) {
   if (!gsap) return;
   const r = btn.getBoundingClientRect();
   gsap.to(btn, {
@@ -159,7 +160,7 @@ export function magnet(gsap: GSAPType, btn: HTMLAnchorElement, e: MouseEvent) {
 /**
  * Reset magnetic button effect
  */
-export function unMagnet(gsap: GSAPType, btn: HTMLAnchorElement) {
+export function unMagnet(gsap: typeof GSAPType, btn: HTMLAnchorElement) {
   if (!gsap) return;
   gsap.to(btn, { 
     x: 0, 
@@ -191,7 +192,7 @@ export function debounce<T extends (...args: any[]) => any>(
  * Setup cursor hover targets
  */
 export function setupCursorTargets(
-  gsap: GSAPType,
+  gsap: typeof GSAPType,
   cursorRef: HTMLDivElement | null,
   setMode: (mode: 'default' | 'active') => void
 ) {
@@ -208,7 +209,7 @@ export function setupCursorTargets(
  * Staggered entrance animation
  */
 export function staggeredEntrance(
-  gsap: GSAPType,
+  gsap: typeof GSAPType,
   elements: NodeListOf<Element>,
   config: AnimationConfig = {}
 ) {
@@ -227,7 +228,7 @@ export function staggeredEntrance(
  * Code text entrance animation
  */
 export function codeEntrance(
-  gsap: GSAPType,
+  gsap: typeof GSAPType,
   element: HTMLElement,
   config: AnimationConfig = {}
 ) {

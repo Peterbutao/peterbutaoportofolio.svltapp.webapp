@@ -1,4 +1,4 @@
-<script lang="ts">
+<script context="module" lang="ts">
   export interface Profile {
     role: string;
     location: string;
@@ -7,7 +7,9 @@
     linkedin: string;
     summary: string;
   }
+</script>
 
+<script lang="ts">
   export let profile: Profile;
 </script>
 

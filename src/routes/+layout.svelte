@@ -56,7 +56,7 @@
   
   <!-- Preload critical assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content={metaTags['og:type']} />

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script context="module" lang="ts">
   export interface WorkItem {
     role: string;
     org: string;
@@ -6,7 +6,9 @@
     place: string;
     points: string[];
   }
+</script>
 
+<script lang="ts">
   export let work: WorkItem[];
 </script>
 

@@ -1,10 +1,12 @@
-<script lang="ts">
+<script context="module" lang="ts">
   export interface Stat {
     value: number;
     suffix: string;
     label: string;
   }
+</script>
 
+<script lang="ts">
   export let stats: Stat[];
 </script>
 

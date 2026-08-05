@@ -15,7 +15,7 @@
     debounce
   } from '$lib/utils/animations';
 
-  let gsap: import('gsap').gsap | null = null;
+  let gsap: typeof import('gsap').default | null = null;
   let cardRef: HTMLDivElement | null = null;
   let codeWrap: HTMLDivElement | null = null;
   let codeRef: HTMLDivElement | null = null;
@@ -68,6 +68,7 @@
   let tease = $state(teases[0]);
 
   const debouncedPageMove = debounce((e: MouseEvent) => {
+    if (!gsap) return;
     onPageMove(gsap, cursorRef, e);
   }, 16);
 
@@ -106,7 +107,7 @@
   <title>{meta.code} — {meta.label}</title>
 </svelte:head>
 
-<div class="page centered" role="presentation" onmousemove={debouncedPageMove} onmouseleave={() => onPageLeave(gsap, cursorRef)}>
+<div class="page centered" role="presentation" onmousemove={debouncedPageMove} onmouseleave={() => onPageLeave(gsap!, cursorRef)}>
   <div class="blob-layer" aria-hidden="true">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
@@ -122,7 +123,7 @@
   </div>
 
   <div class="glass">
-    <div class="card" role="presentation" bind:this={cardRef} onmousemove={(e) => onGlassMove(gsap, cardRef, glowRef, cursorRef, e, { duration: 0.6 })} onmouseleave={() => onGlassLeave(gsap, cardRef, glowRef, cursorRef)}>
+    <div class="card" role="presentation" bind:this={cardRef} onmousemove={(e) => onGlassMove(gsap!, cardRef, glowRef, cursorRef, e, { duration: 0.6 })} onmouseleave={() => onGlassLeave(gsap!, cardRef, glowRef, cursorRef)}>
       <div class="glow" bind:this={glowRef} aria-hidden="true"></div>
 
       <p class="eyebrow" data-stagger>SYSTEM STATUS</p>
@@ -142,8 +143,8 @@
         class="btn"
         bind:this={btnRef}
         data-stagger
-        onmousemove={(e) => magnet(gsap, e.currentTarget as HTMLAnchorElement, e)}
-        onmouseleave={() => unMagnet(gsap, e.currentTarget as HTMLAnchorElement)}
+        onmousemove={(e) => magnet(gsap!, e.currentTarget as HTMLAnchorElement, e)}
+        onmouseleave={(e) => unMagnet(gsap!, e.currentTarget as HTMLAnchorElement)}
       >BACK TO HOME</a>
     </div>
   </div>

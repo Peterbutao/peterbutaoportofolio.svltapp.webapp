@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import '$lib/page-styles.css';
-  import { socialLinks, contactChannels, siteConfig } from '$lib/config/site';
+import { onMount } from 'svelte';
+import '$lib/page-styles.css';
+import { socialLinks, contactChannels, siteConfig } from '$lib/config/site';
+import { magnet, unMagnet, onGlassMove, onGlassLeave } from '$lib/utils/animations';
 
   const teases = [
     'No brief is too early to share.',
@@ -10,6 +11,10 @@
     'Let\'s turn your idea into something real.'
   ];
   let tease = $state(teases[0]);
+
+  let gsap: typeof import('gsap').default | null = null;
+  let codeWrap: HTMLElement | null = null;
+  let bizRef: HTMLDivElement | null = null;
 
   function spinTease() {
     tease = teases[Math.floor(Math.random() * teases.length)];
@@ -21,6 +26,21 @@
     const fallback = img.nextElementSibling;
     if (fallback && fallback instanceof HTMLElement) fallback.style.display = 'flex';
   }
+
+  function onBizMove(e: MouseEvent) {
+    if (!gsap) return;
+    onGlassMove(gsap, bizRef, null, null, e);
+  }
+
+  function onBizLeave() {
+    if (!gsap) return;
+    onGlassLeave(gsap, bizRef, null, null);
+  }
+
+  onMount(async () => {
+    const mod = await import('gsap');
+    gsap = mod.default;
+  });
 </script>
 
 <svelte:head>
@@ -60,7 +80,7 @@
         <div class="left-col">
           <div class="direct-links">
             {#each contactChannels as ch}
-              <a href={ch.href} class="contact-row" onmousemove={(e) => magnet(gsap, e.currentTarget as HTMLAnchorElement, e)} onmouseleave={() => unMagnet(gsap, e.currentTarget as HTMLAnchorElement)}>
+              <a href={ch.href} class="contact-row" onmousemove={(e) => magnet(gsap!, e.currentTarget as HTMLAnchorElement, e)} onmouseleave={(e) => unMagnet(gsap!, e.currentTarget as HTMLAnchorElement)}>
                 <div class="c-icon">{ch.icon}</div>
                 <div class="c-detail">
                   <span class="c-label">{ch.label}</span>
@@ -76,7 +96,7 @@
             <ul class="socials-grid">
               {#each socialLinks as s}
                 <li>
-                  <a href={s.href} target="_blank" rel="noopener" class="social-chip" onmousemove={(e) => magnet(gsap, e.currentTarget as HTMLAnchorElement, e)} onmouseleave={() => unMagnet(gsap, e.currentTarget as HTMLAnchorElement)}>
+                  <a href={s.href} target="_blank" rel="noopener" class="social-chip" onmousemove={(e) => magnet(gsap!, e.currentTarget as HTMLAnchorElement, e)} onmouseleave={(e) => unMagnet(gsap!, e.currentTarget as HTMLAnchorElement)}>
                     <span class="s-dot"></span>
                     {s.label}
                   </a>

@@ -1,9 +1,11 @@
-<script lang="ts">
+<script context="module" lang="ts">
   export interface SkillCategory {
     area: string;
     skills: string[];
   }
+</script>
 
+<script lang="ts">
   export let skills: SkillCategory[];
 </script>
 
