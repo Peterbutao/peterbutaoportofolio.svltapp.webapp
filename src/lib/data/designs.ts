@@ -18,7 +18,7 @@ export const designs: Design[] = [
     date: '2026',
     thumb: '/UI-designs/uipng-1.webp/',
     tags: ['Annual Report', 'Impact', 'UX'],
-    src: '/UI-designs/uipng-1.webp/'
+    src: '/UI-designs/uipng-1.png/'
   },
   {
     slug: '2',
