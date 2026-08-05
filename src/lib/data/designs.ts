@@ -16,9 +16,9 @@ export const designs: Design[] = [
     desc: 'A polished annual report visual designed to communicate programme progress, outcomes, and impact with clarity and authority.',
     details: 'This annual report layout presents FYF programme highlights through a structured visual story, balancing data, milestones, and narrative messaging. The design focuses on readability, stakeholder-friendly presentation, and a professional tone that makes impact reporting feel clear, credible, and engaging.',
     date: '2026',
-    thumb: '/UI-designs/uipng-1.webp',
+    thumb: '/UI-designs/uipng-1.webp/',
     tags: ['Annual Report', 'Impact', 'UX'],
-    src: '/UI-designs/ANNUAL-REPORT.pdf'
+    src: '/UI-designs/uipng-1.webp/'
   },
   {
     slug: '2',
@@ -28,7 +28,7 @@ export const designs: Design[] = [
     date: '2024',
     thumb: '/UI-designs/uipng-2.webp',
     tags: ['Webpage', 'Campaign', 'Brand'],
-    src: '/UI-designs/uidesigns-3.pdf'
+    src: '/UI-designs/uipng-2.webp'
   },
   {
     slug: '3',
@@ -38,7 +38,7 @@ export const designs: Design[] = [
     date: '2024',
     thumb: '/UI-designs/uipng-3.webp',
     tags: ['Infographic', 'Education', 'Reporting'],
-    src: '/UI-designs/uidesigns-3.pdf'
+    src: '/UI-designs/uipng-3.webp'
   },
   {
     slug: '4',
@@ -48,7 +48,7 @@ export const designs: Design[] = [
     date: '2024',
     thumb: '/UI-designs/uipng-4.webp',
     tags: ['Brochure', 'Transform Project', 'Print'],
-    src: '/UI-designs/uidesigns-3.pdf'
+    src: '/UI-designs/uipng-4.webp'
   },
   {
     slug: '5',
@@ -58,7 +58,7 @@ export const designs: Design[] = [
     date: '2024',
     thumb: '/UI-designs/uipng-5.webp',
     tags: ['Brochure', 'BEFIT', 'Communication'],
-    src: '/UI-designs/uidesigns-3.pdf'
+    src: '/UI-designs/uipng-5.webp'
   },
   {
     slug: '6',
@@ -68,7 +68,7 @@ export const designs: Design[] = [
     date: '2024',
     thumb: '/UI-designs/uipng-6.webp',
     tags: ['Infographic', 'Presentation', 'Progress'],
-    src: '/UI-designs/uidesigns-3.pdf'
+    src: '/UI-designs/uipng-6.webp'
   },
 ];
 
