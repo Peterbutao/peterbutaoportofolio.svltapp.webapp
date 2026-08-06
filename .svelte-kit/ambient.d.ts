@@ -38,15 +38,16 @@
  * The above values will be the same _even if_ different values for `ENVIRONMENT` or `PUBLIC_BASE_URL` are set at runtime, as they are statically replaced in your code with their build time values.
  */
 declare module '$env/static/private' {
+	export const AGENT: string;
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
-	export const CHROME_CRASHPAD_PIPE_NAME: string;
 	export const COLOR: string;
 	export const CommonProgramFiles: string;
 	export const CommonProgramW6432: string;
 	export const COMPUTERNAME: string;
 	export const ComSpec: string;
 	export const DEFLOGDIR: string;
+	export const dp0: string;
 	export const DriverData: string;
 	export const EDITOR: string;
 	export const HOME: string;
@@ -84,6 +85,8 @@ declare module '$env/static/private' {
 	export const NUMBER_OF_PROCESSORS: string;
 	export const OneDrive: string;
 	export const OneDriveConsumer: string;
+	export const OPENCODE: string;
+	export const OPENCODE_PID: string;
 	export const OS: string;
 	export const Path: string;
 	export const PATHEXT: string;
@@ -97,7 +100,6 @@ declare module '$env/static/private' {
 	export const PROMPT: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
-	export const SESSIONNAME: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
 	export const TEMP: string;
@@ -194,15 +196,16 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		AGENT: string;
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
-		CHROME_CRASHPAD_PIPE_NAME: string;
 		COLOR: string;
 		CommonProgramFiles: string;
 		CommonProgramW6432: string;
 		COMPUTERNAME: string;
 		ComSpec: string;
 		DEFLOGDIR: string;
+		dp0: string;
 		DriverData: string;
 		EDITOR: string;
 		HOME: string;
@@ -240,6 +243,8 @@ declare module '$env/dynamic/private' {
 		NUMBER_OF_PROCESSORS: string;
 		OneDrive: string;
 		OneDriveConsumer: string;
+		OPENCODE: string;
+		OPENCODE_PID: string;
 		OS: string;
 		Path: string;
 		PATHEXT: string;
@@ -253,7 +258,6 @@ declare module '$env/dynamic/private' {
 		PROMPT: string;
 		PSModulePath: string;
 		PUBLIC: string;
-		SESSIONNAME: string;
 		SystemDrive: string;
 		SystemRoot: string;
 		TEMP: string;

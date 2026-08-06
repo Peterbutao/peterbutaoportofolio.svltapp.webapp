@@ -7,6 +7,7 @@ export interface Design {
   thumb: string;
   tags: string[];
   src: string;
+  carousel: string[];
 }
 
 export const designs: Design[] = [
@@ -16,9 +17,36 @@ export const designs: Design[] = [
     desc: 'A polished annual report visual designed to communicate programme progress, outcomes, and impact with clarity and authority.',
     details: 'This annual report layout presents FYF programme highlights through a structured visual story, balancing data, milestones, and narrative messaging. The design focuses on readability, stakeholder-friendly presentation, and a professional tone that makes impact reporting feel clear, credible, and engaging.',
     date: '2026',
-    thumb: '/UI-designs/uipng-1.webp/',
+    thumb: '/UI-designs/uipng-1.webp',
     tags: ['Annual Report', 'Impact', 'UX'],
-    src: '/UI-designs/uipng-1.png/'
+    src: '/UI-designs/uipng-1.png/',
+    carousel: [
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-0.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-1.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-2.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-3.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-4.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-5.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-6.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-7.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-8.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-9.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-10.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-11.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-12.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-13.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-14.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-15.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-16.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-17.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-18.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-19.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-20.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-21.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-22.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-23.jpg',
+      '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-24.jpg'
+    ]
   },
   {
     slug: '2',
@@ -28,7 +56,8 @@ export const designs: Design[] = [
     date: '2024',
     thumb: '/UI-designs/uipng-2.webp',
     tags: ['Webpage', 'Campaign', 'Brand'],
-    src: '/UI-designs/uipng-2.webp'
+    src: '/UI-designs/uipng-2.webp',
+    carousel: ['/UI-designs/uipng-2.webp']
   },
   {
     slug: '3',
@@ -38,28 +67,31 @@ export const designs: Design[] = [
     date: '2024',
     thumb: '/UI-designs/uipng-3.webp',
     tags: ['Infographic', 'Education', 'Reporting'],
-    src: '/UI-designs/uipng-3.webp'
+    src: '/UI-designs/uipng-3.webp',
+    carousel: ['/UI-designs/uipng-3.webp']
   },
-  {
+{
     slug: '4',
     title: 'Brochure for the Transform Project',
     desc: 'A brochure design that presents the Transform Project through a polished, branded print-ready layout with clear messaging and visual flow.',
-    details: 'This brochure concept is structured to introduce the Transform Project in a clean, professional way that supports both awareness and credibility. The layout organizes project information into an easy-to-follow narrative, helping audiences connect the programme’s purpose, goals, and value proposition at a glance.',
+    details: 'This brochure concept is structured to introduce the Transform Project in a clean, professional way that supports both awareness and credibility. The layout organizes project information into an easy-to-follow narrative, helping audiences connect the programmes purpose, goals, and value proposition at a glance.',
     date: '2024',
     thumb: '/UI-designs/uipng-4.webp',
     tags: ['Brochure', 'Transform Project', 'Print'],
-    src: '/UI-designs/uipng-4.webp'
+    src: '/UI-designs/uipng-4.webp',
+    carousel: ['/UI-designs/uipng-4.webp']
   },
   {
-    slug: '5',
-    title: 'Brochure for the BEFIT Project',
-    desc: 'A brochure layout designed to communicate the BEFIT Project with clarity, consistency, and a strong organisational identity.',
-    details: 'The BEFIT brochure concept focuses on presentational readability and visual hierarchy, so the project’s key messages land quickly and professionally. It is shaped to support stakeholder communication by balancing concise text, clear structure, and persuasive visual design in a print-friendly format.',
-    date: '2024',
-    thumb: '/UI-designs/uipng-5.webp',
-    tags: ['Brochure', 'BEFIT', 'Communication'],
-    src: '/UI-designs/uipng-5.webp'
-  },
+      slug: '5',
+      title: 'Brochure for the BEFIT Project',
+      desc: 'A brochure layout designed to communicate the BEFIT Project with clarity, consistency, and a strong organisational identity.',
+      details: 'The BEFIT brochure concept focuses on presentational readability and visual hierarchy, so the projects key messages land quickly and professionally. It is shaped to support stakeholder communication by balancing concise text, clear structure, and persuasive visual design in a print-friendly format.',
+      date: '2024',
+      thumb: '/UI-designs/uipng-5.webp',
+      tags: ['Brochure', 'BEFIT', 'Communication'],
+      src: '/UI-designs/uipng-5.webp',
+      carousel: ['/UI-designs/uipng-5.webp']
+    },
   {
     slug: '6',
     title: 'Infographic - Annual progress presentation',
@@ -68,7 +100,8 @@ export const designs: Design[] = [
     date: '2024',
     thumb: '/UI-designs/uipng-6.webp',
     tags: ['Infographic', 'Presentation', 'Progress'],
-    src: '/UI-designs/uipng-6.webp'
+    src: '/UI-designs/uipng-6.webp',
+    carousel: ['/UI-designs/uipng-6.webp']
   },
 ];
 

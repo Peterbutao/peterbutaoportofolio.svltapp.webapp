@@ -1,30 +1,43 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { designs } from '$lib/data/designs';
   import '$lib/page-styles.css';
-
-  const carouselMap = {
-    1: ['/UI-designs/uipng-1.webp', '/UI-designs/uipng-2.webp', '/UI-designs/uipng-3.webp'],
-    2: ['/UI-designs/uipng-2.webp', '/UI-designs/uipng-3.webp', '/UI-designs/uipng-4.webp'],
-    3: ['/UI-designs/uipng-3.webp', '/UI-designs/uipng-4.webp', '/UI-designs/uipng-5.webp'],
-    4: ['/UI-designs/uipng-4.webp', '/UI-designs/uipng-5.webp', '/UI-designs/uipng-6.webp'],
-    5: ['/UI-designs/uipng-5.webp', '/UI-designs/uipng-6.webp', '/UI-designs/uipng-1.webp'],
-    6: ['/UI-designs/uipng-6.webp', '/UI-designs/uipng-1.webp', '/UI-designs/uipng-2.webp']
-  };
-
-  /** @type {Record<string, string[]>} */
-  const carouselBySlug = carouselMap;
 
   /** @type {Record<string, number>} */
   let activeSlideById = Object.fromEntries(designs.map((d) => [d.slug, 0]));
 
+  let interval;
+
+  function advanceAll() {
+    for (const d of designs) {
+      const slides = d.carousel ?? [d.thumb ?? ''];
+      const nextIndex = activeSlideById[d.slug] ?? 0;
+      activeSlideById[d.slug] = (nextIndex + 1) % slides.length;
+    }
+  }
+
   /** @param {string} slug @param {number} direction */
   function moveSlide(slug, direction) {
-    const slides = carouselBySlug[slug] ?? [designs.find((d) => d.slug === slug)?.thumb ?? ''];
+    const design = designs.find((d) => d.slug === slug);
+    const slides = design?.carousel ?? [design?.thumb ?? ''];
     const nextIndex = activeSlideById[slug] ?? 0;
     const total = slides.length;
     activeSlideById[slug] = (nextIndex + direction + total) % total;
+    resetInterval();
   }
+
+  function resetInterval() {
+    clearInterval(interval);
+    interval = setInterval(advanceAll, 4000);
+  }
+
+  onMount(() => {
+    interval = setInterval(advanceAll, 4000);
+  });
+
+  onDestroy(() => {
+    clearInterval(interval);
+  });
 </script>
 
 <svelte:head>
@@ -61,7 +74,7 @@
                 <div class="card-thumb">
                   <div class="carousel-frame">
                     <div class="carousel-track" style={`transform: translateX(-${(activeSlideById[d.slug] ?? 0) * 100}%);`}>
-                      {#each carouselBySlug[d.slug] ?? [d.thumb] as slide}
+                      {#each d.carousel as slide}
                         <div class="carousel-slide">
                           <img 
                             src={slide} 
