@@ -1,7 +1,9 @@
 <script lang="ts">
 import { onMount } from 'svelte';
+import Seo from '$lib/components/Seo.svelte';
 import '$lib/page-styles.css';
 import { socialLinks, contactChannels, siteConfig } from '$lib/config/site';
+import { generateContactPageSchema, generateBreadcrumbSchema } from '$lib/utils/seo';
 import { magnet, unMagnet, onGlassMove, onGlassLeave } from '$lib/utils/animations';
 
   const teases = [
@@ -43,9 +45,19 @@ import { magnet, unMagnet, onGlassMove, onGlassLeave } from '$lib/utils/animatio
   });
 </script>
 
-<svelte:head>
-  <title>Contact — Peter Rodrigues Butao</title>
-</svelte:head>
+<Seo
+  path="/contact"
+  title="Contact Peter Rodrigues Butao — Lilongwe, Malawi"
+  description="Get in touch with Peter Rodrigues Butao for project development, monitoring & evaluation, web design and software development. Based in Lilongwe, Malawi."
+  keywords={['contact Peter Butao', 'hire software developer Malawi', 'M&E consultant contact', 'web design enquiry Lilongwe']}
+  schema={[
+    generateContactPageSchema(),
+    generateBreadcrumbSchema([
+      { name: 'Home', url: `${siteConfig.url}/` },
+      { name: 'Contact', url: `${siteConfig.url}/contact` }
+    ])
+  ]}
+/>
 
 <div class="page" role="presentation">
   <div class="blob-layer" aria-hidden="true">

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Seo from '$lib/components/Seo.svelte';
   import Landingpage from '$lib/components/Landingpage.svelte';
   import Organisations from '$lib/components/Organisations.svelte';
   import UIDesigns from '$lib/components/UIDesigns.svelte';
@@ -10,6 +11,37 @@
   import Services from '$lib/components/Services.svelte';
   import Contacts from '$lib/components/Contacts.svelte';
 </script>
+
+<Seo
+  path="/"
+  title="Project Development Specialist, M&E Consultant & Software Developer in Malawi"
+  description="Peter Rodrigues Butao is a project development specialist, M&E consultant, web designer and software developer based in Lilongwe, Malawi."
+  keywords={[
+    'Peter Rodrigues Butao',
+    'Peter Butao',
+    'Software Developer Malawi',
+    'M&E Consultant Malawi',
+    'Web Designer Lilongwe',
+    'Project Development Specialist'
+  ]}
+  schema={[
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': 'https://peterbutao.pages.dev/#webpage',
+      name: 'Peter Rodrigues Butao — Portfolio',
+      description:
+        'Project development specialist, M&E consultant, web designer and software developer based in Malawi.',
+      url: 'https://peterbutao.pages.dev/',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Peter Rodrigues Butao'
+      },
+      primaryImageOfPage: 'https://peterbutao.pages.dev/profile.webp',
+      inLanguage: 'en'
+    }
+  ]}
+/>
 
 <div class="page-wrapper" role="presentation">
   <div class="blob-layer" aria-hidden="true">

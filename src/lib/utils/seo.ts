@@ -4,75 +4,9 @@
 
 import { siteConfig } from '$lib/config/site';
 
-export interface SEOMetadata {
-  title: string;
-  description: string;
-  image?: string;
-  url?: string;
-  type?: 'website' | 'article';
-  publishedTime?: string;
-  modifiedTime?: string;
-  author?: string;
-  section?: string;
-  tags?: string[];
-}
-
-export function generateMetaTags(metadata: SEOMetadata) {
-  const { title, description, image, url, type = 'website' } = metadata;
-  const siteUrl = url || siteConfig.url;
-  const fullTitle = `${title} | ${siteConfig.name}`;
-  const imageUrl = image || `${siteConfig.url}/og-image.jpg`;
-
-  return {
-    title: fullTitle,
-    description,
-    'og:title': fullTitle,
-    'og:description': description,
-    'og:image': imageUrl,
-    'og:url': siteUrl,
-    'og:type': type,
-    'og:site_name': siteConfig.name,
-    'twitter:card': 'summary_large_image',
-    'twitter:title': fullTitle,
-    'twitter:description': description,
-    'twitter:image': imageUrl,
-  };
-}
-
-export function generateStructuredData(metadata: SEOMetadata) {
-  const { title, description, url, type, publishedTime, modifiedTime, author, section, tags } = metadata;
-  const siteUrl = url || siteConfig.url;
-
-  const baseData = {
-    '@context': 'https://schema.org',
-    '@type': type === 'article' ? 'Article' : 'WebSite',
-    name: title,
-    description,
-    url: siteUrl,
-    publisher: {
-      '@type': 'Person',
-      name: siteConfig.name,
-      url: siteConfig.url
-    }
-  };
-
-  if (type === 'article') {
-    return {
-      ...baseData,
-      '@type': 'Article',
-      headline: title,
-      datePublished: publishedTime,
-      dateModified: modifiedTime,
-      author: {
-        '@type': 'Person',
-        name: author || siteConfig.name
-      },
-      articleSection: section,
-      keywords: tags?.join(', ')
-    };
-  }
-
-  return baseData;
+export function absoluteUrl(path: string): string {
+  if (/^https?:\/\//i.test(path)) return path;
+  return new URL(path, siteConfig.url).href;
 }
 
 export function generateBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
@@ -93,7 +27,11 @@ export function generatePersonSchema() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: siteConfig.name,
+    alternateName: 'Peter Butao',
     jobTitle: 'Project Development Specialist, Web Designer & Software Developer',
+    description:
+      'Communications and stakeholder engagement professional and software developer based in Lilongwe, Malawi, specialising in monitoring & evaluation, project development, web design, and software development.',
+    image: `${siteConfig.url}/profile.webp`,
     address: {
       '@type': 'PostalAddress',
       addressLocality: siteConfig.contact.location,
@@ -105,14 +43,139 @@ export function generatePersonSchema() {
     sameAs: [
       siteConfig.socials.linkedin,
       siteConfig.socials.github,
-      siteConfig.socials.twitter
+      siteConfig.socials.twitter,
+      siteConfig.socials.facebook,
+      siteConfig.socials.instagram
     ],
     knowsAbout: [
       'Project Management',
       'Web Development',
       'Monitoring and Evaluation',
       'Stakeholder Engagement',
-      'UI/UX Design'
+      'UI/UX Design',
+      'Communications',
+      'Data Analysis'
     ]
+  };
+}
+
+export function generateOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}/logo.png`,
+    email: siteConfig.contact.email,
+    telephone: siteConfig.contact.phone,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: siteConfig.contact.location,
+      addressCountry: 'Malawi'
+    },
+    sameAs: [
+      siteConfig.socials.linkedin,
+      siteConfig.socials.github,
+      siteConfig.socials.twitter,
+      siteConfig.socials.facebook,
+      siteConfig.socials.instagram
+    ]
+  };
+}
+
+export function generateWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    publisher: {
+      '@type': 'Person',
+      name: siteConfig.name,
+      url: siteConfig.url
+    },
+    inLanguage: 'en'
+  };
+}
+
+export function generateItemListSchema(
+  items: Array<{ name: string; description: string; url: string; image?: string }>
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Portfolio',
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      description: item.description,
+      url: item.url,
+      ...(item.image ? { image: item.image } : {})
+    }))
+  };
+}
+
+export function generateCreativeWorkSchema(input: {
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+  dateCreated?: string;
+  keywords?: string[];
+  type?: 'CreativeWork' | 'VisualArtwork';
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': input.type || 'CreativeWork',
+    name: input.name,
+    headline: input.name,
+    description: input.description,
+    url: input.url,
+    ...(input.image ? { image: input.image, thumbnailUrl: input.image } : {}),
+    ...(input.dateCreated ? { dateCreated: input.dateCreated } : {}),
+    ...(input.keywords?.length ? { keywords: input.keywords.join(', ') } : {}),
+    creator: {
+      '@type': 'Person',
+      name: siteConfig.name,
+      url: siteConfig.url
+    },
+    author: {
+      '@type': 'Person',
+      name: siteConfig.name,
+      url: siteConfig.url
+    }
+  };
+}
+
+export function generateServiceSchema(input: { name: string; description: string; url?: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: input.name,
+    description: input.description,
+    url: input.url || siteConfig.url,
+    serviceType: input.name,
+    provider: {
+      '@type': 'Person',
+      name: siteConfig.name,
+      url: siteConfig.url
+    },
+    areaServed: 'Malawi',
+    availableLanguage: 'en'
+  };
+}
+
+export function generateContactPageSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Peter Rodrigues Butao',
+    description:
+      'Contact Peter Rodrigues Butao for project development, monitoring & evaluation, web design, and software development in Lilongwe, Malawi.',
+    url: `${siteConfig.url}/contact`,
+    mainEntity: generatePersonSchema()
   };
 }

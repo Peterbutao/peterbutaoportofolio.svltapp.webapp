@@ -2,7 +2,11 @@
   import '../app.css';
   import { onMount } from 'svelte';
   import { siteConfig } from '$lib/config/site';
-  import { generateMetaTags, generatePersonSchema } from '$lib/utils/seo';
+  import {
+    generateOrganizationSchema,
+    generatePersonSchema,
+    generateWebSiteSchema
+  } from '$lib/utils/seo';
   import { addScreenReaderOnlyStyles, setupKeyboardNavigation } from '$lib/utils/accessibility';
 
   let { children } = $props();
@@ -21,13 +25,9 @@
   function toggleMenu() { menuOpen = !menuOpen; }
   function closeMenu() { menuOpen = false; }
 
-  const metaTags = generateMetaTags({
-    title: siteConfig.title,
-    description: siteConfig.description,
-    url: siteConfig.url
-  });
-
   const personSchema = generatePersonSchema();
+  const orgSchema = generateOrganizationSchema();
+  const webSiteSchema = generateWebSiteSchema();
 
   onMount(() => {
     let ticking = false;
@@ -51,37 +51,20 @@
 </script>
 
 <svelte:head>
-  <title>{metaTags.title}</title>
-  <meta name="description" content={metaTags.description} />
-  
-  <!-- Preload critical assets -->
+  <!-- Preconnect to font origin -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content={metaTags['og:type']} />
-  <meta property="og:url" content={metaTags['og:url']} />
-  <meta property="og:title" content={metaTags['og:title']} />
-  <meta property="og:description" content={metaTags['og:description']} />
-  <meta property="og:image" content={metaTags['og:image']} />
-  <meta property="og:site_name" content={metaTags['og:site_name']} />
-  
-  <!-- Twitter -->
-  <meta property="twitter:card" content={metaTags['twitter:card']} />
-  <meta property="twitter:url" content={metaTags['og:url']} />
-  <meta property="twitter:title" content={metaTags['twitter:title']} />
-  <meta property="twitter:description" content={metaTags['twitter:description']} />
-  <meta property="twitter:image" content={metaTags['twitter:image']} />
-  
-  <!-- Structured Data -->
+
+  <!-- Global entity structured data (page-specific meta is injected via <Seo>) -->
   <script type="application/ld+json">
     {JSON.stringify(personSchema)}
   </script>
-  
-  <!-- Additional SEO -->
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content={siteConfig.name} />
-  <link rel="canonical" href={siteConfig.url} />
+  <script type="application/ld+json">
+    {JSON.stringify(orgSchema)}
+  </script>
+  <script type="application/ld+json">
+    {JSON.stringify(webSiteSchema)}
+  </script>
 </svelte:head>
 
 <div class="layout" class:scrolled>

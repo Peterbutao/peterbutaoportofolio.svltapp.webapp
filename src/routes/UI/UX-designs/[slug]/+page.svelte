@@ -1,7 +1,38 @@
 <script>
+  import Seo from '$lib/components/Seo.svelte';
+  import { generateCreativeWorkSchema, generateBreadcrumbSchema, absoluteUrl } from '$lib/utils/seo';
+  import { siteConfig } from '$lib/config/site';
+
   export let data;
   const { design } = data;
+
+  const pagePath = `/UI/UX-designs/${design.slug}`;
+  const artworkSchema = generateCreativeWorkSchema({
+    name: design.title,
+    description: design.desc,
+    url: absoluteUrl(pagePath),
+    image: `${siteConfig.url}${design.thumb}`,
+    dateCreated: design.date,
+    keywords: design.tags,
+    type: 'VisualArtwork'
+  });
 </script>
+
+<Seo
+  path={pagePath}
+  title={design.title}
+  description={design.desc}
+  keywords={design.tags}
+  image={design.thumb}
+  schema={[
+    artworkSchema,
+    generateBreadcrumbSchema([
+      { name: 'Home', url: `${siteConfig.url}/` },
+      { name: 'UI Designs', url: `${siteConfig.url}/UI/UX-designs` },
+      { name: design.title, url: absoluteUrl(pagePath) }
+    ])
+  ]}
+/>
 
 <article class="design-page">
   <div class="design-header">
@@ -37,7 +68,7 @@
   .design-thumb {
     width: 100%;
     height: auto;
-    border-radius: 18px;
+    border-radius: 5px;
     object-fit: cover;
     box-shadow: 0 24px 80px rgba(0,0,0,0.1);
   }

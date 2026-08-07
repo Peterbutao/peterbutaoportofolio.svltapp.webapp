@@ -15,7 +15,7 @@
 
 <section class="profile-header">
   <div class="section-label">About</div>
-  <h2 class="section-title">Profile</h2>
+  <h2 class="section-title">Peter Rodrigues Butao</h2>
   <div class="section-divider"></div>
 
   <div class="profile-card">

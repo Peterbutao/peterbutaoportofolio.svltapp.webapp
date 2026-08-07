@@ -13,13 +13,13 @@ export interface Design {
 export const designs: Design[] = [
   {
     slug: '1',
-    title: 'fyf annual report 2026',
+    title: 'FYF annual report 2026',
     desc: 'A polished annual report visual designed to communicate programme progress, outcomes, and impact with clarity and authority.',
     details: 'This annual report layout presents FYF programme highlights through a structured visual story, balancing data, milestones, and narrative messaging. The design focuses on readability, stakeholder-friendly presentation, and a professional tone that makes impact reporting feel clear, credible, and engaging.',
     date: '2026',
     thumb: '/UI-designs/uipng-1.webp',
     tags: ['Annual Report', 'Impact', 'UX'],
-    src: '/UI-designs/uipng-1.png/',
+    src: '/UI-designs/uipng-1.webp',
     carousel: [
       '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-0.jpg',
       '/UI-designs/ui1-annualreport/ANNUAL-REPORT-images-1.jpg',

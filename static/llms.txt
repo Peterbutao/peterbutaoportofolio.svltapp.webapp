@@ -1,0 +1,26 @@
+# Peter Rodrigues Butao
+
+> Peter Rodrigues Butao is a project development specialist, M&E (monitoring & evaluation) consultant, web designer and software developer based in Lilongwe, Malawi. He has 5+ years of experience supporting education, agriculture and community development programmes across Malawi, and builds websites, data dashboards, web apps and developer tools.
+
+## Key facts
+
+- Full name: Peter Rodrigues Butao
+- Location: Lilongwe, Malawi
+- Title: Project Development Specialist, M&E Consultant, Web Designer & Software Developer
+- Email: peterethanbutao@gmail.com
+- Phone: +265 880 164 455
+- Specialties: Monitoring & Evaluation (M&E), Stakeholder Engagement, Project Development, Web Design, UI/UX Design, Software Development (SvelteKit, Next.js, TypeScript, Python, Node.js, PostgreSQL)
+- Metrics: 77 schools reached by a digital education programme, 1,437 teachers trained, 3,400+ students trained in climate & leadership, 2,315 trees planted in community campaigns, 15+ storytelling pieces for donor audiences
+- Affiliations: Rotaract Club of Lilongwe (Director of Community Service), Courageous Kids Foundation, Centre for Child Development & Research
+- Education: MSc Project Management (Malawi School of Government, in progress); BSc Seed Systems (LUANAR)
+
+## Links
+
+- Home: https://peterbutao.pages.dev/
+- About: https://peterbutao.pages.dev/about
+- Projects: https://peterbutao.pages.dev/projects
+- Services: https://peterbutao.pages.dev/services
+- UI/UX Designs: https://peterbutao.pages.dev/UI/UX-designs
+- Contact: https://peterbutao.pages.dev/contact
+- LinkedIn: https://www.linkedin.com/in/peterethanbutao
+- GitHub: https://github.com/Peterbutao

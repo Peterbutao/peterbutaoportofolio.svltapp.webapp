@@ -1,7 +1,40 @@
 <script>
+  import Seo from '$lib/components/Seo.svelte';
+  import { generateCreativeWorkSchema, generateBreadcrumbSchema, absoluteUrl } from '$lib/utils/seo';
+  import { siteConfig } from '$lib/config/site';
+
   export let data;
   const { project } = data;
+
+  const pagePath = `/projects/${project.slug}`;
+  const creativeWork = generateCreativeWorkSchema({
+    name: project.title,
+    description: project.desc,
+    url: absoluteUrl(pagePath),
+    image: `${siteConfig.url}${project.thumb}`,
+    dateCreated: project.date,
+    keywords: [project.projecttype, 'Software Development', 'Web Development']
+  });
 </script>
+
+<Seo
+  path={pagePath}
+  type="article"
+  title={project.title}
+  description={project.desc}
+  publishedTime={project.date}
+  modifiedTime={project.date}
+  keywords={[project.projecttype, 'Portfolio Project', 'Peter Rodrigues Butao']}
+  image={project.thumb}
+  schema={[
+    creativeWork,
+    generateBreadcrumbSchema([
+      { name: 'Home', url: `${siteConfig.url}/` },
+      { name: 'Projects', url: `${siteConfig.url}/projects` },
+      { name: project.title, url: absoluteUrl(pagePath) }
+    ])
+  ]}
+/>
 
 <article class="project-page">
   <div class="project-header">

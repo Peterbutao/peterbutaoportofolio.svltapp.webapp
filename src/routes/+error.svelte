@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { page } from '$app/state';
+  import Seo from '$lib/components/Seo.svelte';
   import '$lib/page-styles.css';
   import { 
     initCursorAnimation, 
@@ -103,9 +104,12 @@
   });
 </script>
 
-<svelte:head>
-  <title>{meta.code} — {meta.label}</title>
-</svelte:head>
+<Seo
+  path="/error"
+  title={`${meta.code} — ${meta.label}`}
+  description={meta.sub}
+  noIndex
+/>
 
 <div class="page centered" role="presentation" onmousemove={debouncedPageMove} onmouseleave={() => onPageLeave(gsap!, cursorRef)}>
   <div class="blob-layer" aria-hidden="true">

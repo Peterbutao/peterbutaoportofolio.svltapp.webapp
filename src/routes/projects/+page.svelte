@@ -1,7 +1,19 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Seo from '$lib/components/Seo.svelte';
   import { projects } from '$lib/data/projects';
+  import { generateItemListSchema, generateBreadcrumbSchema } from '$lib/utils/seo';
+  import { siteConfig } from '$lib/config/site';
   import '$lib/page-styles.css';
+
+  const itemListSchema = generateItemListSchema(
+    projects.map((p) => ({
+      name: p.title,
+      description: p.desc,
+      url: `${siteConfig.url}/projects/${p.slug}`,
+      image: `${siteConfig.url}${p.thumb}`
+    }))
+  );
 
   const teases = [
     'From timetable apps to terminal AI — shipped and live.',
@@ -16,9 +28,19 @@
   }
 </script>
 
-<svelte:head>
-  <title>Projects — Peter Rodrigues Butao</title>
-</svelte:head>
+<Seo
+  path="/projects"
+  title="Software Development Projects — Web Apps, Dashboards & Developer Tools"
+  description="Explore software development projects by Peter Rodrigues Butao: web apps, data dashboards, CLI tools and NPM packages built with SvelteKit, Next.js, Python and Node.js — shipped end to end."
+  keywords={['software projects Malawi', 'web applications portfolio', 'data dashboards', 'SvelteKit projects', 'Peter Butao projects']}
+  schema={[
+    itemListSchema,
+    generateBreadcrumbSchema([
+      { name: 'Home', url: `${siteConfig.url}/` },
+      { name: 'Projects', url: `${siteConfig.url}/projects` }
+    ])
+  ]}
+/>
 
 <div class="page" role="presentation">
   <div class="blob-layer" aria-hidden="true">

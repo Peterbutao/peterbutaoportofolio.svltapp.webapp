@@ -1,7 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Seo from '$lib/components/Seo.svelte';
   import { services } from '$lib/data/services';
+  import { generateServiceSchema, generateBreadcrumbSchema } from '$lib/utils/seo';
+  import { siteConfig } from '$lib/config/site';
   import '$lib/page-styles.css';
+
+  const serviceSchemas = services.map((svc) => generateServiceSchema({ name: svc.title, description: svc.desc }));
 
   let codeWrap: HTMLElement | null = null;
 
@@ -18,9 +23,19 @@
   }
 </script>
 
-<svelte:head>
-  <title>Services — Peter Rodrigues Butao</title>
-</svelte:head>
+<Seo
+  path="/services"
+  title="Services — Project Management, Web Design & Software Development"
+  description="Services offered by Peter Rodrigues Butao: project implementation & management, monitoring & evaluation support, UI/UX & web design, and full-spectrum software development based in Lilongwe, Malawi."
+  keywords={['project management services Malawi', 'software development services', 'web design services', 'M&E support', 'UI/UX design Malawi']}
+  schema={[
+    ...serviceSchemas,
+    generateBreadcrumbSchema([
+      { name: 'Home', url: `${siteConfig.url}/` },
+      { name: 'Services', url: `${siteConfig.url}/services` }
+    ])
+  ]}
+/>
 
 <div class="page" role="presentation">
   <div class="blob-layer" aria-hidden="true">

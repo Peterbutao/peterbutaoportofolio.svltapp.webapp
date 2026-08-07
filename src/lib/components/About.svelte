@@ -24,8 +24,8 @@
     <div class="about-header">
       <p class="eyebrow">ABOUT</p>
       <div class="code-wrap">
-        <div class="code-shadow" aria-hidden="true">PETER</div>
-        <div class="code">PETER</div>
+        <div class="code-shadow" aria-hidden="true">PETER`S PROFILE</div>
+        <div class="code">PETER`S PROFILE</div>
       </div>
     </div>
 

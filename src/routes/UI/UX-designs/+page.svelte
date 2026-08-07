@@ -1,11 +1,24 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
+  import Seo from '$lib/components/Seo.svelte';
   import { designs } from '$lib/data/designs';
+  import { generateItemListSchema, generateBreadcrumbSchema } from '$lib/utils/seo';
+  import { siteConfig } from '$lib/config/site';
   import '$lib/page-styles.css';
+
+  const itemListSchema = generateItemListSchema(
+    designs.map((d) => ({
+      name: d.title,
+      description: d.desc,
+      url: `${siteConfig.url}/UI/UX-designs/${d.slug}`,
+      image: `${siteConfig.url}${d.thumb}`
+    }))
+  );
 
   /** @type {Record<string, number>} */
   let activeSlideById = Object.fromEntries(designs.map((d) => [d.slug, 0]));
 
+  /** @type {ReturnType<typeof setInterval> | undefined} */
   let interval;
 
   function advanceAll() {
@@ -40,9 +53,19 @@
   });
 </script>
 
-<svelte:head>
-  <title>UI/UX Designs — Peter Rodrigues Butao</title>
-</svelte:head>
+<Seo
+  path="/UI/UX-designs"
+  title="UI/UX Design Portfolio — Reports, Brochures & Web Interfaces"
+  description="UI/UX design portfolio by Peter Rodrigues Butao featuring annual reports, infographics, brochures and webpage concepts for education, climate and development programmes."
+  keywords={['UI/UX design portfolio', 'infographic design Malawi', 'annual report design', 'brochure design', 'web interface design']}
+  schema={[
+    itemListSchema,
+    generateBreadcrumbSchema([
+      { name: 'Home', url: `${siteConfig.url}/` },
+      { name: 'UI Designs', url: `${siteConfig.url}/UI/UX-designs` }
+    ])
+  ]}
+/>
 
 <div class="page" role="presentation">
   <div class="blob-layer" aria-hidden="true">

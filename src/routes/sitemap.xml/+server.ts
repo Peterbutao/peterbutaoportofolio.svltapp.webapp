@@ -1,4 +1,8 @@
 import { siteConfig } from '$lib/config/site';
+import { projects } from '$lib/data/projects';
+import { designs } from '$lib/data/designs';
+
+export const prerender = true;
 
 export async function GET() {
   const baseUrl = siteConfig.url;
@@ -13,9 +17,26 @@ export async function GET() {
     { url: '/UI/UX-designs', changefreq: 'weekly', priority: 0.8 }
   ];
 
+  const projectUrls = projects.map((p) => ({
+    url: `/projects/${p.slug}`,
+    changefreq: 'monthly',
+    priority: 0.8,
+    image: `${baseUrl}${p.thumb}`
+  }));
+
+  const designUrls = designs.map((d) => ({
+    url: `/UI/UX-designs/${d.slug}`,
+    changefreq: 'monthly',
+    priority: 0.8,
+    image: `${baseUrl}${d.thumb}`
+  }));
+
+  const allUrls = [...pages, ...projectUrls, ...designUrls];
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${pages
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  ${allUrls
     .map(
       (page) => `
   <url>
@@ -23,6 +44,14 @@ export async function GET() {
     <lastmod>${currentDate}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
+    ${
+      'image' in page
+        ? `
+    <image:image>
+      <image:loc>${page.image}</image:loc>
+    </image:image>`
+        : ''
+    }
   </url>`
     )
     .join('')}
