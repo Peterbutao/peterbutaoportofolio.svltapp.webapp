@@ -163,15 +163,7 @@
     animation-delay: -3s;
   }
 
-  .b4 {
-    top: 62%; right: -14%;
-    width: 300px; height: 300px;
-    background: #ffe066;
-    opacity: 0.45;
-    animation-name: blobTravelA;
-    animation-duration: 12s;
-    animation-delay: -9s;
-  }
+
 
   .w1 {
     top: 8%; right: 18%;
@@ -273,13 +265,13 @@
     padding: 0 0 14px;
   }
 
-  @media (max-width: 720px) {
+  /* @media (max-width: 720px) {
     .b1 { width: 150px; height: 150px; }
     .b2 { width: 190px; height: 190px; }
     .b3 { width: 140px; height: 140px; }
     .w1 { width: 120px; height: 120px; }
     .w2 { width: 140px; height: 140px; }
-  }
+  } */
 
   @media (prefers-reduced-motion: reduce) {
     .blob {

@@ -42,10 +42,7 @@ export function generatePersonSchema() {
     url: siteConfig.url,
     sameAs: [
       siteConfig.socials.linkedin,
-      siteConfig.socials.github,
-      siteConfig.socials.twitter,
-      siteConfig.socials.facebook,
-      siteConfig.socials.instagram
+      siteConfig.socials.github
     ],
     knowsAbout: [
       'Project Management',
@@ -75,10 +72,7 @@ export function generateOrganizationSchema() {
     },
     sameAs: [
       siteConfig.socials.linkedin,
-      siteConfig.socials.github,
-      siteConfig.socials.twitter,
-      siteConfig.socials.facebook,
-      siteConfig.socials.instagram
+      siteConfig.socials.github
     ]
   };
 }

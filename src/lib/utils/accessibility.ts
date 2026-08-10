@@ -150,23 +150,6 @@ export function addScreenReaderOnlyStyles() {
       border-width: 0;
     }
     
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px 16px;
-      z-index: 100;
-      transition: top 0.3s;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    
-    .skip-link:focus {
-      top: 0;
-    }
-    
     /* Focus visible styles for keyboard navigation */
     :focus-visible {
       outline: 2px solid var(--yl);

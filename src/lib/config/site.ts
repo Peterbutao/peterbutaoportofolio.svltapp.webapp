@@ -31,12 +31,8 @@ export const siteConfig = {
   },
   
   socials: {
-    twitter: 'https://twitter.com',
-    twitterHandle: '@peterethanbutao',
-    facebook: 'https://facebook.com',
-    instagram: 'https://instagram.com',
-    linkedin: 'https://linkedin.com/in/peterethanbutao',
-    github: 'https://github.com'
+    linkedin: 'https://www.linkedin.com/in/peter-butao-7238471b4/',
+    github: 'https://github.com/Peterbutao'
   },
   
   links: {
@@ -46,9 +42,6 @@ export const siteConfig = {
 };
 
 export const socialLinks: SocialLink[] = [
-  { label: 'Twitter',   href: siteConfig.socials.twitter,    abbr: 'TW' },
-  { label: 'Facebook',  href: siteConfig.socials.facebook,   abbr: 'FB' },
-  { label: 'Instagram', href: siteConfig.socials.instagram,  abbr: 'IG' },
   { label: 'LinkedIn',  href: siteConfig.socials.linkedin,   abbr: 'LI' },
   { label: 'GitHub',    href: siteConfig.socials.github,     abbr: 'GH' }
 ];

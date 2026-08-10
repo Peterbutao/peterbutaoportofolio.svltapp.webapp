@@ -21,7 +21,7 @@
   <div class="profile-card">
     <div class="profile-role">{profile.role}</div>
     <div class="profile-location">
-      <span>📍</span> {profile.location}
+      <span>::</span> {profile.location}
     </div>
     <div class="profile-contact">
       <a href="mailto:{profile.email}" class="contact-link">{profile.email}</a>

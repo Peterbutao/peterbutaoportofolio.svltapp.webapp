@@ -46,8 +46,23 @@
     </div>
   </div>
 
-  <div class="project-details">
-    <p>{project.details}</p>
+  <div class="project-sections">
+    <div class="project-section">
+      <h3>Problem</h3>
+      <p>{project.problem}</p>
+    </div>
+    <div class="project-section">
+      <h3>My Role</h3>
+      <p>{project.role}</p>
+    </div>
+    <div class="project-section">
+      <h3>Technology/Approach</h3>
+      <p>{project.approach}</p>
+    </div>
+    <div class="project-section">
+      <h3>Result</h3>
+      <p>{project.result}</p>
+    </div>
   </div>
 
   <div class="project-actions">
@@ -102,10 +117,31 @@
     max-width: 720px;
   }
 
-  .project-details {
+  .project-sections {
     margin-top: 42px;
-    font-size: 0.95rem;
-    line-height: 1.9;
+    display: grid;
+    gap: 18px;
+  }
+
+  .project-section {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+
+  .project-section h3 {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+    color: var(--bk);
+  }
+
+  .project-section p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.8;
     color: var(--gray);
   }
 

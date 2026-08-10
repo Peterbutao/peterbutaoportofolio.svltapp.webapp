@@ -41,7 +41,7 @@
         <span>Donor Compliance & Audit Support</span>
       </li>
     </ul>
-    <a href="https://www.linkedin.com/in/peterethanbutao" target="_blank" rel="noopener" class="consultant-btn">
+    <a href="https://www.linkedin.com/in/peter-butao-7238471b4/" target="_blank" rel="noopener" class="consultant-btn">
       VIEW M&E WORK
       <span class="li-badge">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

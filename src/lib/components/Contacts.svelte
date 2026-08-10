@@ -1,10 +1,7 @@
 <script>
   const socials = [
-    { label: 'Twitter',   href: 'https://twitter.com',                    abbr: 'TW' },
-    { label: 'Facebook',  href: 'https://facebook.com',                   abbr: 'FB' },
-    { label: 'Instagram', href: 'https://instagram.com',                  abbr: 'IG' },
-    { label: 'LinkedIn',  href: 'https://linkedin.com/in/peterethanbutao',abbr: 'LI' },
-    { label: 'GitHub',    href: 'https://github.com',                     abbr: 'GH' },
+    { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/peter-butao-7238471b4/', abbr: 'LI' },
+    { label: 'GitHub',    href: 'https://github.com/Peterbutao',                     abbr: 'GH' },
   ];
 
   /** @param {Event} event */

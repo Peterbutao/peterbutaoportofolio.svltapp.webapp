@@ -113,6 +113,25 @@
 </div>
 
 <style>
+  /* ─── SKIP LINK (on-screen only when focused) ─── */
+  .skip-link {
+    position: fixed;
+    top: -40px;
+    left: 8px;
+    background: var(--bk, #000);
+    color: var(--wt, #fff);
+    padding: 8px 16px;
+    z-index: 200;
+    transition: top 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
   .layout {
     min-height: 100vh;
     display: flex;

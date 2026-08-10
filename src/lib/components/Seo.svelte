@@ -62,15 +62,6 @@
     <meta property="article:author" content={siteConfig.name} />
   {/if}
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={fullTitle} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={imageUrl} />
-  <meta name="twitter:image:alt" content={description} />
-  <meta name="twitter:site" content={siteConfig.socials.twitterHandle} />
-  <meta name="twitter:creator" content={siteConfig.socials.twitterHandle} />
-
   {#each schema as item}
     <script type="application/ld+json">{JSON.stringify(item)}</script>
   {/each}

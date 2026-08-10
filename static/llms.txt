@@ -22,5 +22,5 @@
 - Services: https://peterbutao.pages.dev/services
 - UI/UX Designs: https://peterbutao.pages.dev/UI/UX-designs
 - Contact: https://peterbutao.pages.dev/contact
-- LinkedIn: https://www.linkedin.com/in/peterethanbutao
+- LinkedIn: https://www.linkedin.com/in/peter-butao-7238471b4/
 - GitHub: https://github.com/Peterbutao
